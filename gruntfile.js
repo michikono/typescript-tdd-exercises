@@ -3,6 +3,8 @@
 
 module.exports = function (grunt) {
     // Load grunt tasks automatically
+    grunt.loadNpmTasks('grunt-notify');
+
     require('load-grunt-config')(grunt, {
         jitGrunt: {
         }
