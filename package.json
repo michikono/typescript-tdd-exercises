@@ -1,0 +1,34 @@
+{
+  "name": "typescript-starter",
+  "version": "1.0.0",
+  "description": "A basic seed project to run typescript",
+  "main": "index.js",
+  "scripts": {
+    "preinstall": "npm install -g typescript mocha tsd@next karma-cli supervisor",
+    "ts": "find src/*.ts test/*.ts -type f -exec tsc --target ES5 --sourceMap --module commonjs '{}' \\;",
+    "pretest": "npm run ts",
+    "test": "mocha",
+    "prewatch": "npm install growl --save-dev",
+    "watch": "supervisor -w src/,test/ -n exit -e ts -x npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/michikono/typescript-starter.git"
+  },
+  "keywords": [
+    "typescript"
+  ],
+  "author": "Michi Kono <michikono@gmail.com> (https://github.com/michikono)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/michikono/typescript-starter/issues"
+  },
+  "homepage": "https://github.com/michikono/typescript-starter",
+  "devDependencies": {
+    "growl": "^1.8.1",
+    "karma-mocha": "^0.1.10",
+    "mocha": "^1.21.5",
+    "sinomocha": "^0.2.3",
+    "sinon": "^1.12.2"
+  }
+}
