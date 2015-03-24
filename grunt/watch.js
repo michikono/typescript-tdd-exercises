@@ -5,7 +5,7 @@ module.exports = {
             'src/**/*.ts',
             'test/**/*.ts'
         ],
-        tasks: ['ts:default']
+        tasks: ['clean:default', 'ts:default']
     },
     test: {
         files: [
