@@ -8,7 +8,6 @@
     "ts": "find src/*.ts test/*.ts -type f -exec tsc --target ES5 --sourceMap --module commonjs '{}' \\;",
     "pretest": "npm run ts",
     "test": "mocha",
-    "prewatch": "npm install growl --save-dev",
     "watch": "supervisor -w src/,test/ -n exit -e ts -x npm test"
   },
   "repository": {
