@@ -1,6 +1,10 @@
 # Overview
 
-This project contains a set of exercises to help teach TDD. It borrows the setup files found at the [Typescript Starter repo](https://github.com/michikono/typescript-starter)
+This project contains a set of exercises to help teach TDD.
+
+You can find instructions for individual exercises in the `src/` folder.
+
+The setup process borrows the setup files found at the [Typescript Starter repo](https://github.com/michikono/typescript-starter)
 
 Note that this requires that you install `npm` (`node` comes with it: http://nodejs.org/download/). This is because TypeScript
 compiles to JavaScript and without Node, you would need to run your code in a browser. Running sample snippets in a browser
