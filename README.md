@@ -15,17 +15,29 @@ For these exercises, we will use [Grunt](http://gruntjs.com/) to manage the buil
 
 This final step is the one that turns on the TDD process and is what you use going forward:
 
-    `npm run watch`
+    npm run watch
 
-For reference, these are the commands under the hood (but you shouldn't need to run them):
+To run tests manually:
 
-    npm run ts  # compiles typescript
-    npm test    # runs tests
+    npm test
 
-It should reload the tests on each change. There are a few secondary dependencies you may need to install by hand:
+To get notifications working, you may need to install the following:
 
 1. Install [Growl](http://growl.info/downloads#growlnotify)
 2. Run `sudo gem install terminal-notifier`
+
+# Under the Hood
+
+You can find all of the grunt configurations in the `grunt` folder. Here's what Grunt is doing:
+
+1. Compiled TypeScript output (JavaScript) goes to the `out` folder while preserving the original file/folder structure.
+2. All of the `.js` files are then copied (concatenated) to a single file `out/test.js` file. The source maps are preserved.
+3. All `out/src/**/*.js` files are "instrumented" by Istanbul for code coverage analysis. The results are stored in `out/instrument`.
+4. Code coverage involves running all tests against this instrumented folder. The instrumented files are merged with test files and placed in `out/coverage.js`. The file is executed.
+5. Coverage results are captured in `coverage/`.
+6. Coverage thresholds are configured in `grunt/coverage.js` and the data is pulled from `coverage/reports/coverage.json`.
+7. If any grunt process fails (e.g., a test or a coverage threshold) an error is shown and the rest of the jobs stop.
+8. `npm run watch` watches for code changes that trigger the above steps automatically as necessary. It is meant to be noisy if you are not writing passing tests.
 
 # Notes
 
