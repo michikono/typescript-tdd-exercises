@@ -2,9 +2,19 @@ module.exports = {
     test: {
         options: {
             reporter: 'spec',
-            quiet: false, // Optionally suppress output to standard out (defaults to false)
-            clearRequireCache: false // Optionally clear the require cache before running tests (defaults to false)
+            quiet: false // Optionally suppress output to standard out (defaults to false)
         },
-        src: ['out/**/*.js']
+        src: [
+            'out/test.js'
+        ]
+    },
+    coverage: {
+        options: {
+            quiet: true, // Optionally suppress output to standard out (defaults to false)
+            clearRequireCache: true
+        },
+        src: [
+            'out/coverage.js'
+        ]
     }
 };

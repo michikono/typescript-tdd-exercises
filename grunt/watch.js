@@ -5,13 +5,12 @@ module.exports = {
             'src/**/*.ts',
             'test/**/*.ts'
         ],
-        tasks: ['clean:default', 'ts:default']
+        tasks: ['clean:ts', 'ts:default', 'concat:test']
     },
     test: {
         files: [
-            'out/**/*.js'
+            'out/**/test.js'
         ],
-        tasks: ['mochaTest:test']
+        tasks: ['mochaTest:test', 'buildCoverage', 'coverage']
     }
-
 };

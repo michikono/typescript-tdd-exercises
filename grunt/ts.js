@@ -1,13 +1,12 @@
 module.exports = {
     default: {
-        files: [
-            {src: ['src/**/*.ts'], dest: 'out/src'},
-            {src: ['test/**/*.ts'], dest: 'out/test'}
-        ],
+        src: ['references.ts', 'src/**/*.ts', 'test/**/*.ts'],
+        outDir: 'out',
         options: {
             fast: 'never',
             module: 'commonjs',
             target: 'es5'
-        }
+        },
+        reference: 'references.ts'
     }
 };

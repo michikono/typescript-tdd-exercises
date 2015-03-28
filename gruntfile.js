@@ -4,18 +4,34 @@
 module.exports = function (grunt) {
     // Load grunt tasks automatically
     grunt.loadNpmTasks('grunt-notify');
+    grunt.loadNpmTasks('grunt-istanbul');
+    grunt.loadNpmTasks('grunt-istanbul-coverage');
 
     require('load-grunt-config')(grunt, {
         jitGrunt: {
+
         }
     });
     // Time how long tasks take. Can help when optimizing build times
     require('time-grunt')(grunt);
 
+    grunt.registerTask('buildCoverage',
+        [
+            'clean:coverage',
+            'instrument',
+            'concat:coverage',
+            'mochaTest:coverage',
+            'storeCoverage',
+            'makeReport'
+        ]);
+
     grunt.registerTask('test', [
         'clean:default',
         'ts:default',
-        'mochaTest:test'
+        'concat:test',
+        'mochaTest',
+        'buildCoverage',
+        'coverage'
     ]);
 
     grunt.registerTask('install', [
