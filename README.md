@@ -26,6 +26,14 @@ To get notifications working, you may need to install the following:
 1. Install [Growl](http://growl.info/downloads#growlnotify)
 2. Run `sudo gem install terminal-notifier`
 
+## Seeing Code Coverage
+
+You can see code coverage analysis in two ways:
+
+1. Make a change while `grunt watch` is on and read the console
+2. Run `grunt test` and read the console
+3. Run one of the above two steps and then visit [the lcov report page](coverage/reports/lcov-report/index.html) (file will be missing if a coverage analysis has not been run)
+
 # Under the Hood
 
 You can find all of the grunt configurations in the `grunt` folder. Here's what Grunt is doing:
