@@ -1,11 +1,9 @@
 /// <reference path="../../references.ts" />
-require('source-map-support').install();
-
 import assert = require("assert");
 require('sinomocha')();
 
 describe('MechanicalThings Module', function () {
-    describe('vroom()', function () {
+    describe('move()', function () {
         it('should return the right sound effect', function () {
             var car = new MechanicalThings.CarImpl();
             assert.equal(car.sound(), 'vroom!');

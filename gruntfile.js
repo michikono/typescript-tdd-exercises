@@ -6,10 +6,10 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-notify');
     grunt.loadNpmTasks('grunt-istanbul');
     grunt.loadNpmTasks('grunt-istanbul-coverage');
+    grunt.loadNpmTasks('grunt-text-replace');
 
     require('load-grunt-config')(grunt, {
         jitGrunt: {
-
         }
     });
     // Time how long tasks take. Can help when optimizing build times
@@ -18,6 +18,7 @@ module.exports = function (grunt) {
     grunt.registerTask('buildCoverage',
         [
             'clean:coverage',
+            'replace:coverage',
             'instrument',
             'concat:coverage',
             'mochaTest:coverage',
