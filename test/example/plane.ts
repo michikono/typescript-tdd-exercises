@@ -23,13 +23,11 @@ describe('MechanicalThings Module', function () {
             plane.move({x: 2, y: 3});
             assert.deepEqual({x: 20, y: 40}, plane.position());
         });
-        //it('should change the location in an additive way', function () {
-        //    var plane = new MechanicalThings.PlaneImpl();
-        //    plane.move({x: 2, y: 3});
-        //    plane.move({x: 0, y: -4});
-        //    assert.deepEqual({x: 20, y: 0}, plane.position());
-        //});
-
-
+        it('should change the location in an additive way', function () {
+            var plane = new MechanicalThings.PlaneImpl();
+            plane.move({x: 2, y: 3});
+            plane.move({x: 0, y: -4});
+            assert.deepEqual({x: 20, y: 0}, plane.position());
+        });
     });
 });
