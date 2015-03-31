@@ -1,9 +1,9 @@
 /// <reference path="../../references.ts" />
 
-module MechanicalThings {
-    export interface Transportation {
-        sound: () => string
-        move: (offset: Coordinate) => void
-        position: () => Coordinate
+module Example {
+    export interface Coordinate {
+        x: number
+        y: number
     }
 }
+
