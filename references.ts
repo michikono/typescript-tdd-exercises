@@ -25,3 +25,4 @@
 /// <reference path="test/example/vacation.ts" />
 /// <reference path="test/exercise1/index.ts" />
 //grunt-end
+

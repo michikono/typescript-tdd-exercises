@@ -9,7 +9,7 @@ module.exports = {
     },
     test: {
         files: [
-            'out/**/test.js'
+            'out/test.js'
         ],
         tasks: ['mochaTest:test', 'buildCoverage', 'coverage']
     }

@@ -49,6 +49,11 @@ You can find all of the grunt configurations in the `grunt` folder. Here's what 
 
 # Notes
 
+## TypeScript
+
+* Pay special attention to nesting modules: top level modules don't use `export`, but children should. See more here: http://stackoverflow.com/questions/12991382/typescript-modules
+
+
 ## Structure
 
 * As you make changes, all code is bundled into a single `.js` file at `out/test.js` and `out/coverage.js`. This is to avoid the complexity of

@@ -1,7 +1,7 @@
 /// <reference path="../../../references.ts" />
-import assert = require("assert");
-require('sinomocha')();
+var assert = require("assert");
 
+// Alternate testing method of modules -- explicitly typing out the entire namespace
 describe('MechanicalThings Module', function () {
     describe('move()', function () {
         it('should return the right sound effect', function () {
