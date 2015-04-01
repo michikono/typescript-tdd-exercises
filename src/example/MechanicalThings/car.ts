@@ -17,9 +17,13 @@ module Example {
                 };
             }
 
+            velocity() {
+                return 1;
+            }
+
             move(offset:Coordinate) {
-                this.x = this.x + offset.x;
-                this.y = this.y + offset.y;
+                this.x = this.x + (offset.x * this.velocity());
+                this.y = this.y + (offset.y * this.velocity());
             }
         }
     }

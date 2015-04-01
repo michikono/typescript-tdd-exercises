@@ -5,6 +5,7 @@ module Example {
         export interface Transportation {
             sound: () => string
             move: (offset:Coordinate) => void
+            velocity: () => number
             position: () => Coordinate
         }
     }
