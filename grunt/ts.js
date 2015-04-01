@@ -5,6 +5,7 @@ module.exports = {
         options: {
             fast: 'never',
             module: 'commonjs',
+            comments: true,
             target: 'es5'
         },
         reference: 'references.ts'
