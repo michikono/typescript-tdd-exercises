@@ -14,7 +14,7 @@
 //grunt-start
 /// <reference path="src/example/MechanicalThings/car.ts" />
 /// <reference path="src/example/MechanicalThings/plane.ts" />
-/// <reference path="src/example/vacation.ts" />
+/// <reference path="src/example/driver.ts" />
 /// <reference path="src/exercise1/index.ts" />
 /// <reference path="src/exercise2/index.ts" />
 /// <reference path="src/exercise3/index.ts" />
@@ -22,7 +22,7 @@
 /// <reference path="src/exercise5/index.ts" />
 /// <reference path="test/example/MechanicalThings/car.ts" />
 /// <reference path="test/example/MechanicalThings/plane.ts" />
-/// <reference path="test/example/vacation.ts" />
+/// <reference path="test/example/driver.ts" />
 /// <reference path="test/exercise1/index.ts" />
 //grunt-end
 
