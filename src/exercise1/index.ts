@@ -5,7 +5,7 @@
 
 class Exercise1 {
 
-    constructor(private word: string) {
+    constructor(private word:string) {
 
     }
 

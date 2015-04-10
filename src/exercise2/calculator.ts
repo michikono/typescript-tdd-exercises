@@ -6,7 +6,7 @@ module Calculator {
     }
 
     export class NumberExpression implements Expression {
-        constructor(private val: number) {
+        constructor(private val:number) {
 
         }
 
@@ -16,7 +16,7 @@ module Calculator {
     }
 
     export class AddExpression implements Expression {
-        constructor(private left: Expression, private right: Expression) {
+        constructor(private left:Expression, private right:Expression) {
 
         }
 
@@ -28,15 +28,15 @@ module Calculator {
     // REMOVE THESE LINES WHEN START THE EXERCISE
     /* istanbul ignore next */
     export class ExpressionComparer {
-        constructor(private left: Expression, private right: Expression) {
+        constructor(private left:Expression, private right:Expression) {
 
         }
 
-        equals(): Boolean {
+        equals():Boolean {
             return this.left.eval() == this.right.eval()
         }
 
-        greaterThan(): Boolean {
+        greaterThan():Boolean {
             return this.left.eval() < this.right.eval()
         }
     }
