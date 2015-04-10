@@ -71,3 +71,4 @@ using `tsd install [name] --save` (more on this here: [https://github.com/Defini
 compiles to JavaScript and without Node, you would need to run your code in a browser. Running sample snippets in a browser
 adds unnecessary complexity as compared to running Node scripts.
 * Testing is done using two libraries. One is [Mocha](http://mochajs.org/#getting-started), a framework for writing assertions. The other is [Sinon](http://sinonjs.org/docs/), a stubbing and mocking library.
+* The Sinon methods are enabled through [Sinomocha](https://github.com/keithamus/sinomocha). It effectively attaches sinon methods to the scope inside `it()` methods. See examples of this in [Driver tests](./test/example/driver.ts)
