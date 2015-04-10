@@ -1,3 +1,10 @@
 /// <reference path="../references.ts" />
-require('source-map-support').install();
-require('sinomocha')();
+var assert = require("assert");
+
+describe('EXAMPLE MODULE OR CLASS', function () {
+    describe('METHODTOTEST()', function () {
+        it('should DO SOME BEHAVIOR WHEN SOME CONDITION', function () {
+
+        });
+    });
+});
