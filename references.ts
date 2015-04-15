@@ -17,7 +17,7 @@
 /// <reference path="src/example/driver.ts" />
 /// <reference path="src/exercise1/index.ts" />
 /// <reference path="src/exercise2/calculator.ts" />
-/// <reference path="src/exercise3/index.ts" />
+/// <reference path="src/exercise3/minesweeper.ts" />
 /// <reference path="src/exercise4/index.ts" />
 /// <reference path="src/exercise5/index.ts" />
 /// <reference path="test/example/MechanicalThings/car.ts" />
@@ -25,6 +25,7 @@
 /// <reference path="test/example/driver.ts" />
 /// <reference path="test/exercise1/index.ts" />
 /// <reference path="test/exercise2/calculator.ts" />
+/// <reference path="test/exercise3/minesweeper.ts" />
 /// <reference path="test/test.template.ts" />
 //grunt-end
 
