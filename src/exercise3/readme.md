@@ -75,7 +75,7 @@ it runs again, returns the same results.
 bug). Use the results from `getMineLocations` to place all mines with equal probability.
 * Lower the number of mines being placed and update your tests for `printMineSweeperBoard`: stub `getMineLocations()` 
 so that it returns a predetermined set of coordinates that you can write your tests against. The previously 
-randomly broken tests should now always pass.
+randomly broken tests should now always pass. Make sure to check if `getMineLocations` is getting called (via spies).
 * Add a method for printing a mine: change the line with the ternary operator to call a method instead: 
 `placeMine: (coordinate: MineCoordinate) => string` which will return either `*` or `?` based on if the location has been
 guessed during the constructor.
