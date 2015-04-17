@@ -40,10 +40,12 @@
     "grunt-ts": "^3.0.0",
     "karma-mocha": "^0.1.10",
     "load-grunt-config": "^0.16.0",
-    "mocha": "^1.21.5",
-    "sinomocha": "^0.2.3",
+    "mocha": "^2.2.4",
     "sinon": "^1.12.2",
     "source-map-support": "^0.2.10",
     "time-grunt": "^1.1.0"
+  },
+  "dependencies": {
+    "blessed": "^0.1.0"
   }
 }

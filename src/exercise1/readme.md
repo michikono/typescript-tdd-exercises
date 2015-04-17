@@ -36,14 +36,14 @@ If you've done this correctly, you should see output that resembles:
 
 ## Exercise 2
 
-Add a test for the `removeVowels()` method. The test should go to [/test/exercise1/index.ts](../../test/exercise1/index.ts)
+Add a test for the `removeVowels()` method. The test should go to [/test/exercise1/word.ts](../../test/exercise1/word.ts)
 
-You should see the coverage report edge back up to 100%. The [exercise 1 coverage report][../../coverage/reports/lcov-report/exercise1/index.js.html] should
+You should see the coverage report edge back up to 100%. The [exercise 1 coverage report][../../coverage/reports/lcov-report/exercise1/word.js.html] should
 show the removeVowels method fully covered (green). You will notice `removeNumbers()` is still red.
 
 ## Exercise 3
 
-Add a test for the `removeNumbers()` method. The test should go to [/test/exercise1/index.ts](../../test/exercise1/index.ts)
+Add a test for the `removeNumbers()` method. The test should go to [/test/exercise1/word.ts](../../test/exercise1/word.ts)
 
 Note that you want to write the test, *it will fail*. This is because we have not yet added the logic for `removeNumbers()`.
 

@@ -1,0 +1,11 @@
+/// <reference path="../references.ts" />
+var assert = require("assert");
+var sinon: SinonStatic = require("sinon");
+
+describe('EXAMPLE MODULE OR CLASS', () => {
+    describe('METHODTOTEST()', () => {
+        it('should DO SOME BEHAVIOR WHEN SOME CONDITION', () => {
+
+        });
+    });
+});
