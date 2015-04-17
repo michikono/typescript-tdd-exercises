@@ -1,16 +1,16 @@
 ///// <reference path="../../references.ts" />
 
 module GameOfLife {
-    export var blessed: Blessed = require('blessed');
+    export var blessed:Blessed = require('blessed');
 
     export class Terminal {
-        private program: BlessedProgram;
-        private screen: BlessedScreen;
-        private box: BlessedBox;
-        private refreshInterval: number = 500;
-        private intervalId: number;
+        private program:BlessedProgram;
+        private screen:BlessedScreen;
+        private box:BlessedBox;
+        private refreshInterval:number = 500;
+        private intervalId:number;
 
-        constructor(blessed: Blessed) {
+        constructor(blessed:Blessed) {
             this.initProgram(blessed);
             this.initScreen(blessed);
         }
@@ -28,7 +28,7 @@ module GameOfLife {
             return this.intervalId;
         }
 
-        public setRefreshRate(interval: number) {
+        public setRefreshRate(interval:number) {
             this.refreshInterval = interval;
         }
 
@@ -36,7 +36,7 @@ module GameOfLife {
             return this.refreshInterval;
         }
 
-        public setContent(content: string) {
+        public setContent(content:string) {
             this.box.content = content;
         }
 
@@ -47,7 +47,7 @@ module GameOfLife {
         public exit() {
             this.stopLoop();
             /* istanbul ignore else */
-            if(this.program) {
+            if (this.program) {
                 this.program.clear();
                 this.program.showCursor();
                 this.program.normalBuffer();
