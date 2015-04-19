@@ -3,20 +3,29 @@ require('source-map-support').install();
 require('sinomocha')();
 
 module Exercise1 {
-    var assert = require("assert");
-    var sinon:SinonStatic = require("sinon");
+    export var assert = require("assert");
+    export var sinon:SinonStatic = require("sinon");
 }
 
 module Calculator {
-    var assert = require("assert");
-    var sinon:SinonStatic = require("sinon");
+    export var assert = require("assert");
+    export var sinon:SinonStatic = require("sinon");
 }
 
 module LegacyCode {
-    var assert = require("assert");
-    var sinon:SinonStatic = require("sinon");
+    export var assert = require("assert");
+    export var sinon:SinonStatic = require("sinon");
 }
 module GameOfLife {
-    var assert = require("assert");
-    var sinon:SinonStatic = require("sinon");
+    export var assert = require("assert");
+    export var sinon:SinonStatic = require("sinon");
+
+    // purposely destroy the local instance of this variable
+    // too many bugs arise from it being accidentally invoked
+    blessed = {
+        program: null,
+        screen: null,
+        box: null
+    };
+
 }

@@ -7,7 +7,7 @@ module GameOfLife {
         private program:BlessedProgram;
         private screen:BlessedScreen;
         private box:BlessedBox;
-        private refreshInterval:number = 500;
+        private refreshInterval:number = 250;
         private intervalId:number;
         private callback:() => string;
 
@@ -16,6 +16,10 @@ module GameOfLife {
             // was passed in
             this.initProgram(blessed);
             this.initScreen(blessed);
+        }
+
+        public static instance():Terminal {
+            return new GameOfLife.Terminal(blessed);
         }
 
         public startLoop() {
@@ -92,7 +96,7 @@ module GameOfLife {
                 tags: true,
                 style: {
                     fg: '#ffffff',
-                    bg: '#ff0000'
+                    bg: '#000000'
                 }
             });
             this.screen.append(this.box);

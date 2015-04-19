@@ -35,11 +35,10 @@ module.exports = function (grunt) {
         'coverage'
     ]);
 
-    grunt.registerTask('run', [
+    grunt.registerTask('build', [
         'clean:build',
         'ts:default',
-        'concat:build',
-        'execute:default'
+        'concat:build'
     ]);
 
     grunt.registerTask('install', [

@@ -1,13 +1,13 @@
 /// <reference path="../../references.ts" />
 
-// This file is ignored by tests
-console.log('\n**** INITIALIZE THE GAME HERE ****\n');
+// THIS FILE IS IGNORED BY TESTS
+// Avoid placing logic here!
+console.log('\n**** GAME INITIALIZING ****\n');
 
-//var terminal = GameOfLife.Terminal.factory();
-var terminal = new GameOfLife.Terminal(GameOfLife.blessed);
-var i =0;
+var terminal = GameOfLife.Terminal.instance();
 terminal.loopCallback(function() {
-    return '.' + i++;
+    return 'My example output, the date:\n' +
+        Date() +
+        '\n\nPress q to quit';
 });
 terminal.startLoop();
-

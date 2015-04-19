@@ -6,6 +6,8 @@
   "scripts": {
     "preinstall": "npm install -g typescript mocha tsd@next karma-cli grunt-cli",
     "postinstall": "tsd reinstall --save",
+    "pree4": "grunt build",
+    "e4": "node ./out/build.js",
     "ts": "grunt ts",
     "test": "grunt test",
     "watch": "grunt watch"
@@ -32,7 +34,6 @@
     "grunt-contrib-clean": "^0.6.0",
     "grunt-contrib-concat": "^0.5.1",
     "grunt-contrib-watch": "^0.6.1",
-    "grunt-execute": "^0.2.2",
     "grunt-istanbul": "^0.5.0",
     "grunt-istanbul-coverage": "^0.1.1",
     "grunt-mocha-test": "^0.12.7",
