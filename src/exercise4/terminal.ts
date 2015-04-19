@@ -9,8 +9,11 @@ module GameOfLife {
         private box:BlessedBox;
         private refreshInterval:number = 500;
         private intervalId:number;
+        private callback:() => string;
 
         constructor(blessed:Blessed) {
+            // a more testable variation of this is to call methods on whatever
+            // was passed in
             this.initProgram(blessed);
             this.initScreen(blessed);
         }
@@ -22,6 +25,10 @@ module GameOfLife {
         public stopLoop() {
             clearInterval(this.intervalId);
             this.intervalId = null;
+        }
+
+        public loopCallback(callback:() => string) {
+            this.callback = callback;
         }
 
         public getIntervalId() {
@@ -57,15 +64,15 @@ module GameOfLife {
 
         private initProgram(blessed) {
             this.program = blessed.program();
-            this.program.key('q', this.quitCallback);
+            this.program.key('q', this.getQuitCallback());
             this.program.clear();
         }
 
         /* istanbul ignore next */
-        private quitCallback() {
-            return (ch, key) => {
+        private getQuitCallback() {
+            return ((ch, key) => {
                 this.exit()
-            }
+            }).bind(this);
         }
 
         private initScreen(blessed) {
@@ -81,7 +88,7 @@ module GameOfLife {
                 left: '0',
                 width: '100%',
                 height: '100%',
-                content: '█',
+                content: '',
                 tags: true,
                 style: {
                     fg: '#ffffff',
@@ -93,9 +100,14 @@ module GameOfLife {
 
         private refreshMethod() {
             this.screen.render();
+            if (this.callback) {
+                // typecast to string
+                this.setContent("" + this.callback());
+            }
         }
 
         private killProcess() {
+            this.program.unkey('q', this.getQuitCallback());
             process.exit(0);
         }
     }

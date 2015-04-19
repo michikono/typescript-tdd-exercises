@@ -5,7 +5,7 @@ module.exports = {
             'src/**/*.ts',
             'test/**/*.ts'
         ],
-        tasks: ['clean:ts', 'ts:default', 'concat:test']
+        tasks: ['clean:ts', 'ts:default', 'concat:build', 'concat:test']
     },
     test: {
         files: [

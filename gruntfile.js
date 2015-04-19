@@ -35,6 +35,13 @@ module.exports = function (grunt) {
         'coverage'
     ]);
 
+    grunt.registerTask('run', [
+        'clean:build',
+        'ts:default',
+        'concat:build',
+        'execute:default'
+    ]);
+
     grunt.registerTask('install', [
         'npm-install'
     ]);

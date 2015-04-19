@@ -9,6 +9,9 @@ module.exports = {
         'out/src/*',
         'out/test/*'
     ],
+    build: [
+        'out/build.js*'
+    ],
     default: [
         'out/*',
         'coverage/*'

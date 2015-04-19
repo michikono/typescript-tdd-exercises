@@ -5,7 +5,6 @@ module GameOfLife {
         describe('Terminal', () => {
             var programStub:SinonStub;
             var programMock:BlessedProgram;
-            var programClearStub:SinonStub;
             var screenStub:SinonStub;
             var screenMock:BlessedScreen;
             var boxStub:SinonStub;
@@ -16,14 +15,33 @@ module GameOfLife {
             var clock:SinonFakeTimers;
 
             before(() => {
-                programMock = blessed.program();
-                programClearStub = sinon.stub(programMock, 'clear');
+                programMock = {
+                    key: sinon.stub(),
+                    unkey: sinon.stub(),
+                    clear: sinon.stub(),
+                    enableMouse: sinon.stub(),
+                    disableMouse: sinon.stub(),
+                    showCursor: sinon.stub(),
+                    hideCursor: sinon.stub(),
+                    normalBuffer: sinon.stub(),
+                    alternateBuffer: sinon.stub(),
+                    exit: sinon.stub()
+                };
+
                 programStub = sinon.stub(blessed, 'program').returns(programMock);
 
-                screenMock = blessed.screen();
+                screenMock = {
+                    render: sinon.stub(),
+                    append: sinon.stub(),
+                    remove: sinon.stub(),
+                    enableKeys: sinon.stub()
+                };
                 screenStub = sinon.stub(blessed, 'screen').returns(screenMock);
 
-                boxMock = blessed.box();
+                boxMock = {
+                    content: ''
+                };
+
                 boxStub = sinon.stub(blessed, 'box').returns(boxMock);
                 blessedMock = {
                     program: () => programMock,
@@ -39,7 +57,6 @@ module GameOfLife {
 
             afterEach(() => {
                 clock.restore();
-                programClearStub.reset();
                 programStub.reset();
                 screenStub.reset();
                 boxStub.reset();
@@ -47,7 +64,6 @@ module GameOfLife {
             });
 
             after(() => {
-                programClearStub.restore();
                 programStub.restore();
                 screenStub.restore();
                 boxStub.restore();
@@ -58,102 +74,76 @@ module GameOfLife {
                 terminal = null;
             });
 
-            afterEach(() => {
-                programMock.showCursor();
-                programMock.normalBuffer();
-            });
-
             describe('Constructor', () => {
                 var initProgramStub:SinonStub;
                 var initScreenStub:SinonStub;
-                var setRefreshRateStub:SinonStub;
 
                 before(() => {
                     initProgramStub = sinon.stub(Terminal.prototype, 'initProgram');
                     initScreenStub = sinon.stub(Terminal.prototype, 'initScreen');
-                    setRefreshRateStub = sinon.stub(Terminal.prototype, 'setRefreshRate');
                 });
 
                 afterEach(() => {
                     initProgramStub.reset();
                     initScreenStub.reset();
-                    setRefreshRateStub.reset();
                 });
 
                 after(() => {
                     initProgramStub.restore();
                     initScreenStub.restore();
-                    setRefreshRateStub.restore();
                 });
 
                 it('Should call initialization methods', () => {
-                    var defaultRefreshRate = 500;
                     terminal = new Terminal(blessedMock);
-                    assert.ok(initProgramStub.calledOnce);
-                    assert.ok(initScreenStub.calledOnce);
+                    assert.ok(initProgramStub.calledWithExactly(blessedMock));
+                    assert.ok(initScreenStub.calledWithExactly(blessedMock));
                 });
             });
             describe('initProgram', () => {
                 var initScreenStub:SinonStub;
-                var setRefreshRateStub:SinonStub;
-                var programKeySpy:SinonSpy;
 
                 before(() => {
                     initScreenStub = sinon.stub(Terminal.prototype, 'initScreen');
-                    setRefreshRateStub = sinon.stub(Terminal.prototype, 'setRefreshRate');
-                    programKeySpy = sinon.stub(programMock, 'key');
                 });
 
                 afterEach(() => {
                     initScreenStub.reset();
-                    setRefreshRateStub.reset();
-                    programKeySpy.reset();
                 });
 
                 after(() => {
                     initScreenStub.restore();
-                    setRefreshRateStub.restore();
-                    programKeySpy.restore();
                 });
 
-                it('should attach a "q" event to quitCallback and call clear()', () => {
+                it('should attach a "q" event to getQuitCallback and call clear()', () => {
+                    var getQuitCallbackSpy = sinon.spy(Terminal.prototype, 'getQuitCallback');
                     terminal = new Terminal(blessedMock);
-                    assert.ok(programKeySpy.calledWithExactly('q', Terminal.prototype['quitCallback']));
-                    assert.ok(programClearStub.calledOnce);
+                    assert.ok((<SinonStub> programMock.key).calledWith('q'));
+                    assert.ok((<SinonStub> programMock.clear).calledOnce);
+                    assert.ok(getQuitCallbackSpy.calledOnce);
+                    getQuitCallbackSpy.restore();
                 });
             });
             describe('initScreen', () => {
                 var initProgramStub:SinonStub;
-                var setRefreshRateStub:SinonStub;
-                var appendSpy:SinonSpy;
-                var enableKeysSpy:SinonSpy;
 
                 before(() => {
                     initProgramStub = sinon.stub(Terminal.prototype, 'initProgram');
-                    setRefreshRateStub = sinon.stub(Terminal.prototype, 'setRefreshRate');
-                    appendSpy = sinon.spy(screenMock, 'append');
-                    enableKeysSpy = sinon.spy(screenMock, 'enableKeys');
                 });
 
                 afterEach(() => {
                     initProgramStub.reset();
-                    setRefreshRateStub.reset();
-                    appendSpy.reset();
-                    enableKeysSpy.reset();
+                    (<SinonStub> screenMock.append).reset();
+                    (<SinonStub> screenMock.enableKeys).reset();
                 });
                 after(() => {
                     initProgramStub.restore();
-                    setRefreshRateStub.restore();
-                    appendSpy.restore();
-                    enableKeysSpy.restore();
                 });
-
 
                 // this is the main behavior that is crucial to showing content 
                 it('should append a box object to the screen', () => {
                     terminal = new Terminal(blessedMock);
-                    assert.ok(appendSpy.calledOnce);
-                    assert.ok(enableKeysSpy.calledOnce);
+                    assert.ok((<SinonStub> screenMock.append).calledOnce);
+                    assert.ok((<SinonStub> screenMock.enableKeys).calledOnce);
                 });
             });
             describe('setRefreshRate', () => {
@@ -197,6 +187,55 @@ module GameOfLife {
                     assert.ok(refreshMethodSpy.called);
                 });
             });
+
+            describe('loopCallback', () => {
+                it('should not call loopCallback initially', () => {
+                    terminal = new Terminal(blessedMock);
+                    var callback = sinon.stub().returns('');
+                    terminal.loopCallback(callback);
+                    terminal.startLoop();
+                    assert.ok(callback.notCalled);
+                });
+                it('should call loopCallback once after the initial tick', () => {
+                    terminal = new Terminal(blessedMock);
+                    var callback = sinon.stub().returns('');
+                    terminal.loopCallback(callback);
+                    terminal.startLoop();
+                    clock.tick(terminal.getRefreshRate() + 1);
+                    assert.ok(callback.calledOnce);
+                });
+
+                it('should pass callback return value to setContent', () => {
+                    terminal = new Terminal(blessedMock);
+                    var callback = sinon.stub().returns('test string');
+                    terminal.loopCallback(callback);
+                    var stub = sinon.stub(terminal, 'setContent');
+                    terminal.startLoop();
+                    clock.tick(terminal.getRefreshRate() + 1);
+                    assert.ok(stub.calledWithExactly('test string'));
+                });
+                it('should call loopCallback multiple times as time moves forward', () => {
+                    terminal = new Terminal(blessedMock);
+                    var callback = sinon.stub().returns('');
+                    terminal.loopCallback(callback);
+                    terminal.startLoop();
+                    clock.tick(terminal.getRefreshRate() + 1);
+                    clock.tick(terminal.getRefreshRate() + 1);
+                    assert.ok(callback.calledTwice);
+                });
+                it('should call loopCallback at a rate that is set by setRefreshRate', () => {
+                    terminal = new Terminal(blessedMock);
+                    var callback = sinon.stub().returns('');
+                    terminal.loopCallback(callback);
+                    terminal.setRefreshRate(1000);
+                    terminal.startLoop();
+                    clock.tick(1001);
+
+                    clock.tick(1001);
+                    assert.ok(callback.called);
+                });
+
+            });
             describe('stopLoop', () => {
                 it('should get rid of the interval ID', () => {
                     terminal = new Terminal(blessedMock);
@@ -215,15 +254,23 @@ module GameOfLife {
             });
             describe('exit', () => {
                 it('should attempt to kill the process', () => {
-                    var screen = new Terminal(blessedMock);
-                    screen.exit();
+                    var terminal = new Terminal(blessedMock);
+                    terminal.exit();
                     assert.ok(processStub.calledWith(0));
                 });
                 it('should attempt stop the loop', () => {
-                    var screen = new Terminal(blessedMock);
-                    var stopLoopStub = sinon.stub(screen, 'stopLoop');
-                    screen.exit();
+                    var terminal = new Terminal(blessedMock);
+                    var stopLoopStub = sinon.stub(terminal, 'stopLoop');
+                    terminal.exit();
                     assert.ok(stopLoopStub.called);
+                });
+                it('should attempt to kill the process', () => {
+                    var terminal = new Terminal(blessedMock);
+                    var getQuitCallbackStub = sinon.stub(terminal, 'getQuitCallback');
+                    terminal.exit();
+                    assert.ok((<SinonStub> programMock.unkey).calledWith('q'));
+                    assert.ok(getQuitCallbackStub.calledOnce);
+                    getQuitCallbackStub.restore();
                 });
             });
         });

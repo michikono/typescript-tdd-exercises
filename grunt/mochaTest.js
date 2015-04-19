@@ -10,7 +10,7 @@ module.exports = {
     },
     coverage: {
         options: {
-            quiet: true, // Optionally suppress output to standard out (defaults to false)
+            quiet: false, // Optionally suppress output to standard out (defaults to false)
             clearRequireCache: true
         },
         src: [
