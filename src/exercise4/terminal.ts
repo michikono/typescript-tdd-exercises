@@ -4,19 +4,25 @@ module GameOfLife {
     export var blessed:Blessed = require('blessed');
 
     export class Terminal implements IPrintable {
+        private blessed:Blessed;
         private program:BlessedProgram;
         private screen:BlessedScreen;
-        private box:BlessedBox;
+        private box:BlessedBox = {
+            content: ''
+        };
 
-        constructor(blessed:Blessed) {
+        constructor(blessed?:Blessed) {
             // a more testable variation of this is to call methods on whatever
             // was passed in
-            this.initProgram(blessed);
-            this.initScreen(blessed);
+            if(blessed) {
+                this.setBlessed(blessed);
+            }
         }
 
         public static instance():Terminal {
-            return new GameOfLife.Terminal(blessed);
+            var terminal = new GameOfLife.Terminal();
+            terminal.setBlessed(blessed);
+            return terminal;
         }
 
         public print(content: string) {
@@ -42,20 +48,12 @@ module GameOfLife {
             this.killProcess()
         }
 
-        private initProgram(blessed) {
+        // note: this probably belongs in another class
+        public setBlessed(blessed:Blessed) {
             this.program = blessed.program();
             this.program.key('q', this.getQuitCallback());
             this.program.clear();
-        }
 
-        /* istanbul ignore next */
-        private getQuitCallback() {
-            return ((ch, key) => {
-                this.exit()
-            }).bind(this);
-        }
-
-        private initScreen(blessed) {
             this.screen = blessed.screen({
                 program: this.program,
                 autoPadding: true,
@@ -76,6 +74,13 @@ module GameOfLife {
                 }
             });
             this.screen.append(this.box);
+        }
+
+        /* istanbul ignore next */
+        private getQuitCallback() {
+            return ((ch, key) => {
+                this.exit()
+            }).bind(this);
         }
 
         private killProcess() {

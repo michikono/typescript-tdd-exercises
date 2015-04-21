@@ -49,18 +49,15 @@ module GameOfLife {
             });
 
             describe('Constructor', () => {
-                var initProgramStub:SinonStub;
-                var initScreenStub:SinonStub;
-
-                beforeEach(() => {
-                    initProgramStub = sandbox.stub(Terminal.prototype, 'initProgram');
-                    initScreenStub = sandbox.stub(Terminal.prototype, 'initScreen');
+                it('Should not require any arguments', () => {
+                    terminal = new Terminal();
+                    assert.ok(terminal);
                 });
 
-                it('Should call initialization methods', () => {
+                it('Should allow blessed to be passed in', () => {
+                    var setBlessedStub = sandbox.stub(Terminal.prototype, 'setBlessed');
                     terminal = new Terminal(blessed);
-                    assert.ok(initProgramStub.calledWithExactly(blessed));
-                    assert.ok(initScreenStub.calledWithExactly(blessed));
+                    assert.ok(setBlessedStub.calledWithExactly(blessed));
                 });
             });
             describe('instance', () => {
@@ -70,35 +67,29 @@ module GameOfLife {
                     assert.ok(spy.calledWithNew(spy));
                 });
                 it('should pass blessed into the constructor call', () => {
-                    var spy = sandbox.spy(GameOfLife, 'Terminal');
+                    var setBlessedStub = sandbox.stub(Terminal.prototype, 'setBlessed');
                     var instance = Terminal.instance();
-                    assert.ok(spy.calledWithExactly(blessed));
+                    assert.ok(setBlessedStub.calledWithExactly(blessed));
+                });
+                it('should call setBlessed', () => {
+                    var setBlessedStub = sandbox.stub(Terminal.prototype, 'setBlessed');
+                    var instance = Terminal.instance();
+                    assert.ok(setBlessedStub.called);
                 });
             });
-            describe('initProgram', () => {
-                var initScreenStub:SinonStub;
-
-                beforeEach(() => {
-                    initScreenStub = sandbox.stub(Terminal.prototype, 'initScreen');
-                });
-
+            describe('setBlessed', () => {
                 it('should attach a "q" event to getQuitCallback and call clear()', () => {
-                    var getQuitCallbackSpy = sandbox.spy(Terminal.prototype, 'getQuitCallback');
-                    terminal = new Terminal(blessed);
+                    terminal = new Terminal();
+                    var getQuitCallbackSpy = sandbox.spy(terminal, 'getQuitCallback');
+                    terminal.setBlessed(blessed);
                     assert.ok((<SinonStub> programMock.key).calledWith('q'));
                     assert.ok((<SinonStub> programMock.clear).calledOnce);
                     assert.ok(getQuitCallbackSpy.calledOnce);
                 });
-            });
-            describe('initScreen', () => {
-
-                beforeEach(() => {
-                    sandbox.stub(Terminal.prototype, 'initProgram');
-                });
-
                 // this is the main behavior that is crucial to showing content 
                 it('should append a box object to the screen', () => {
-                    terminal = new Terminal(blessed);
+                    terminal = new Terminal();
+                    terminal.setBlessed(blessed);
                     assert.ok((<SinonStub> screenMock.append).calledOnce);
                     assert.ok((<SinonStub> screenMock.enableKeys).calledOnce);
                 });

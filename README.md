@@ -76,6 +76,7 @@ in other
 languages. If you end up using external libraries such as Underscore.js, you may want to install dependencies
 using `tsd install [name] --save` (more on this here: 
 [https://github.com/DefinitelyTyped/tsd](https://github.com/DefinitelyTyped/tsd))
+* Folders you may want to mark as excluded from your IDE's code index: `out/`, `node_modules/`, and `coverage/`.
 
 ## Resources
 
