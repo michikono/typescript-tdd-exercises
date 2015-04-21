@@ -5,13 +5,15 @@ module GameOfLife {
         // it's very important we stub out external dependencies
         var engine: Engine;
         var clock:SinonFakeTimers;
+        var sandbox:SinonSandbox;
 
         beforeEach(() => {
-            clock = sinon.useFakeTimers();
+            sandbox = sinon.sandbox.create();
+            clock = sandbox.useFakeTimers();
         });
 
         afterEach(() => {
-            clock.restore();
+            sandbox.restore();
         });
 
         describe('Engine', () => {
@@ -33,7 +35,7 @@ module GameOfLife {
             describe('print', () => {
                 it('should return the pipe instance you pass in', () => {
                     var pipe = {
-                        print: sinon.spy()
+                        print: sandbox.spy()
                     };
                     var engine = new Engine();
                     engine.pipe(pipe);
@@ -45,14 +47,14 @@ module GameOfLife {
             describe('cycle', () => {
                 it('should not call cycle initially', () => {
                     engine = new Engine();
-                    var callback = sinon.stub().returns('');
+                    var callback = sandbox.stub().returns('');
                     engine.cycle(callback);
                     engine.start();
                     assert.ok(callback.notCalled);
                 });
                 it('should call cycle once after the initial tick', () => {
                     engine = new Engine();
-                    var callback = sinon.stub().returns('');
+                    var callback = sandbox.stub().returns('');
                     engine.cycle(callback);
                     engine.start();
                     clock.tick(engine.getRefreshRate() + 1);
@@ -60,7 +62,7 @@ module GameOfLife {
                 });
                 it('should call cycle multiple times as time moves forward', () => {
                     engine = new Engine();
-                    var callback = sinon.stub().returns('');
+                    var callback = sandbox.stub().returns('');
                     engine.cycle(callback);
                     engine.start();
                     clock.tick(engine.getRefreshRate() + 1);
@@ -69,7 +71,7 @@ module GameOfLife {
                 });
                 it('should call cycle at a rate that is set by setRefreshRate', () => {
                     engine = new Engine();
-                    var callback = sinon.stub().returns('');
+                    var callback = sandbox.stub().returns('');
                     engine.cycle(callback);
                     engine.setRefreshRate(1000);
                     engine.start();
@@ -83,20 +85,20 @@ module GameOfLife {
             describe('start', () => {
                 it('should not call callback initially', () => {
                     engine = new Engine();
-                    var callbackSpy = sinon.spy(engine, 'callback');
+                    var callbackSpy = sandbox.spy(engine, 'callback');
                     engine.start();
                     assert.ok(callbackSpy.notCalled);
                 });
                 it('should call callback once after the initial tick', () => {
                     engine = new Engine();
-                    var callbackSpy = sinon.spy(engine, 'callback');
+                    var callbackSpy = sandbox.spy(engine, 'callback');
                     engine.start();
                     clock.tick(engine.getRefreshRate() + 1);
                     assert.ok(callbackSpy.calledOnce);
                 });
                 it('should call callback multiple times as time moves forward', () => {
                     engine = new Engine();
-                    var callbackSpy = sinon.spy(engine, 'callback');
+                    var callbackSpy = sandbox.spy(engine, 'callback');
                     engine.start();
                     clock.tick(engine.getRefreshRate() + 1);
                     clock.tick(engine.getRefreshRate() + 1);
@@ -104,7 +106,7 @@ module GameOfLife {
                 });
                 it('should call callback at a rate that is set by setRefreshRate', () => {
                     engine = new Engine();
-                    var callbackSpy = sinon.spy(engine, 'callback');
+                    var callbackSpy = sandbox.spy(engine, 'callback');
                     engine.setRefreshRate(1000);
                     engine.start();
                     clock.tick(1001);
