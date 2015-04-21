@@ -32,7 +32,8 @@ You can see code coverage analysis in two ways:
 
 1. Make a change while `grunt watch` is on and read the console
 2. Run `grunt test` and read the console
-3. Run one of the above two steps and then visit [the lcov report page](./coverage/reports/lcov-report/index.html) (file will be missing if a coverage analysis has not been run)
+
+Then visit [the lcov report page](./coverage/reports/lcov-report/index.html) (file will be missing if a coverage analysis has not been run)
 
 # Under the Hood
 

@@ -4,10 +4,13 @@
 // Avoid placing logic here!
 console.log('\n**** GAME INITIALIZING ****\n');
 
-var terminal = GameOfLife.Terminal.instance();
-terminal.loopCallback(function() {
-    return 'My example output, the date:\n' +
-        Date() +
-        '\n\nPress q to quit';
-});
-terminal.startLoop();
+module GameOfLife {
+    var engine = new Engine();
+    engine.pipe(Terminal.instance());
+    engine.cycle(function(pipe) {
+        pipe.print('My example output, the datetime:\n' +
+            Date() +
+            '\n\nPress q to quit');
+    });
+    engine.start();
+}

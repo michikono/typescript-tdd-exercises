@@ -11,7 +11,6 @@ module GameOfLife {
             var boxMock:BlessedBox;
             var processStub:SinonStub;
             var terminal:Terminal;
-            var clock:SinonFakeTimers;
 
             before(() => {
                 blessed.program = sinon.stub();
@@ -53,7 +52,6 @@ module GameOfLife {
             });
 
             beforeEach(() => {
-                clock = sinon.useFakeTimers();
                 processStub = sinon.stub(process, 'exit');
 
                 (<SinonStub> blessed.program).reset();
@@ -78,7 +76,6 @@ module GameOfLife {
             });
 
             afterEach(() => {
-                clock.restore();
                 programStub.reset();
                 screenStub.reset();
                 boxStub.reset();
@@ -175,104 +172,6 @@ module GameOfLife {
                     assert.ok((<SinonStub> screenMock.enableKeys).calledOnce);
                 });
             });
-            describe('setRefreshRate', () => {
-                it('should change the internal refresh rate (via getRefreshRate)', () => {
-                    terminal = new Terminal(blessed);
-                    var customRefreshRate = 600;
-                    assert.notEqual(customRefreshRate, terminal.getRefreshRate());
-                    terminal.setRefreshRate(customRefreshRate);
-                    assert.equal(customRefreshRate, terminal.getRefreshRate());
-                });
-            });
-            describe('startLoop', () => {
-                it('should not call refreshMethod initially', () => {
-                    terminal = new Terminal(blessed);
-                    var refreshMethodSpy = sinon.spy(terminal, 'refreshMethod');
-                    terminal.startLoop();
-                    assert.ok(refreshMethodSpy.notCalled);
-                });
-                it('should call refreshMethod once after the initial tick', () => {
-                    terminal = new Terminal(blessed);
-                    var refreshMethodSpy = sinon.spy(terminal, 'refreshMethod');
-                    terminal.startLoop();
-                    clock.tick(terminal.getRefreshRate() + 1);
-                    assert.ok(refreshMethodSpy.calledOnce);
-                });
-                it('should call refreshMethod multiple times as time moves forward', () => {
-                    terminal = new Terminal(blessed);
-                    var refreshMethodSpy = sinon.spy(terminal, 'refreshMethod');
-                    terminal.startLoop();
-                    clock.tick(terminal.getRefreshRate() + 1);
-                    clock.tick(terminal.getRefreshRate() + 1);
-                    assert.ok(refreshMethodSpy.calledTwice);
-                });
-                it('should call refreshMethod at a rate that is set by setRefreshRate', () => {
-                    terminal = new Terminal(blessed);
-                    var refreshMethodSpy = sinon.spy(terminal, 'refreshMethod');
-                    terminal.setRefreshRate(1000);
-                    terminal.startLoop();
-                    clock.tick(1001);
-                    clock.tick(1001);
-                    assert.ok(refreshMethodSpy.called);
-                });
-            });
-
-            describe('loopCallback', () => {
-                it('should not call loopCallback initially', () => {
-                    terminal = new Terminal(blessed);
-                    var callback = sinon.stub().returns('');
-                    terminal.loopCallback(callback);
-                    terminal.startLoop();
-                    assert.ok(callback.notCalled);
-                });
-                it('should call loopCallback once after the initial tick', () => {
-                    terminal = new Terminal(blessed);
-                    var callback = sinon.stub().returns('');
-                    terminal.loopCallback(callback);
-                    terminal.startLoop();
-                    clock.tick(terminal.getRefreshRate() + 1);
-                    assert.ok(callback.calledOnce);
-                });
-
-                it('should pass callback return value to setContent', () => {
-                    terminal = new Terminal(blessed);
-                    var callback = sinon.stub().returns('test string');
-                    terminal.loopCallback(callback);
-                    var stub = sinon.stub(terminal, 'setContent');
-                    terminal.startLoop();
-                    clock.tick(terminal.getRefreshRate() + 1);
-                    assert.ok(stub.calledWithExactly('test string'));
-                });
-                it('should call loopCallback multiple times as time moves forward', () => {
-                    terminal = new Terminal(blessed);
-                    var callback = sinon.stub().returns('');
-                    terminal.loopCallback(callback);
-                    terminal.startLoop();
-                    clock.tick(terminal.getRefreshRate() + 1);
-                    clock.tick(terminal.getRefreshRate() + 1);
-                    assert.ok(callback.calledTwice);
-                });
-                it('should call loopCallback at a rate that is set by setRefreshRate', () => {
-                    terminal = new Terminal(blessed);
-                    var callback = sinon.stub().returns('');
-                    terminal.loopCallback(callback);
-                    terminal.setRefreshRate(1000);
-                    terminal.startLoop();
-                    clock.tick(1001);
-
-                    clock.tick(1001);
-                    assert.ok(callback.called);
-                });
-
-            });
-            describe('stopLoop', () => {
-                it('should get rid of the interval ID', () => {
-                    terminal = new Terminal(blessed);
-                    terminal.startLoop();
-                    terminal.stopLoop();
-                    assert.ok(!terminal.getIntervalId());
-                });
-            });
             describe('setContent', () => {
                 it('should set the internal content', () => {
                     terminal = new Terminal(blessed);
@@ -281,17 +180,19 @@ module GameOfLife {
                     assert.equal("new content", terminal.getContent());
                 });
             });
+            describe('print', () => {
+                it('should set be a wrapper for setContent', () => {
+                    terminal = new Terminal(blessed);
+                    var setContentStub = sinon.stub(terminal, 'setContent');
+                    terminal.print("new content");
+                    assert.ok(setContentStub.called);
+                });
+            });
             describe('exit', () => {
                 it('should attempt to kill the process', () => {
                     var terminal = new Terminal(blessed);
                     terminal.exit();
                     assert.ok(processStub.calledWith(0));
-                });
-                it('should attempt stop the loop', () => {
-                    var terminal = new Terminal(blessed);
-                    var stopLoopStub = sinon.stub(terminal, 'stopLoop');
-                    terminal.exit();
-                    assert.ok(stopLoopStub.called);
                 });
                 it('should attempt to kill the process', () => {
                     var terminal = new Terminal(blessed);

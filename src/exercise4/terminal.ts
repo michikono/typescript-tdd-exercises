@@ -3,13 +3,10 @@
 module GameOfLife {
     export var blessed:Blessed = require('blessed');
 
-    export class Terminal {
+    export class Terminal implements IPrintable {
         private program:BlessedProgram;
         private screen:BlessedScreen;
         private box:BlessedBox;
-        private refreshInterval:number = 250;
-        private intervalId:number;
-        private callback:() => string;
 
         constructor(blessed:Blessed) {
             // a more testable variation of this is to call methods on whatever
@@ -22,32 +19,12 @@ module GameOfLife {
             return new GameOfLife.Terminal(blessed);
         }
 
-        public startLoop() {
-            this.intervalId = setInterval(this.refreshMethod.bind(this), this.refreshInterval);
-        }
-
-        public stopLoop() {
-            clearInterval(this.intervalId);
-            this.intervalId = null;
-        }
-
-        public loopCallback(callback:() => string) {
-            this.callback = callback;
-        }
-
-        public getIntervalId() {
-            return this.intervalId;
-        }
-
-        public setRefreshRate(interval:number) {
-            this.refreshInterval = interval;
-        }
-
-        public getRefreshRate() {
-            return this.refreshInterval;
+        public print(content: string) {
+            this.setContent(content);
         }
 
         public setContent(content:string) {
+            this.screen.render();
             this.box.content = content;
         }
 
@@ -56,7 +33,6 @@ module GameOfLife {
         }
 
         public exit() {
-            this.stopLoop();
             /* istanbul ignore else */
             if (this.program) {
                 this.program.clear();
@@ -100,14 +76,6 @@ module GameOfLife {
                 }
             });
             this.screen.append(this.box);
-        }
-
-        private refreshMethod() {
-            this.screen.render();
-            if (this.callback) {
-                // typecast to string
-                this.setContent("" + this.callback());
-            }
         }
 
         private killProcess() {
