@@ -15,7 +15,7 @@ Edit [index.ts](./index.ts); uncomment the line about `istanbul ignore` that loo
 By removing this line, the class defined below it will begin to count against the code coverage reports. You should notice
 your code coverage is no longer at 100%. The next three exercises will help you get back to 100% coverage.
 
-## Exercise 1
+## Exercise A
 
 Find and open the [/coverage/reports/lcov-report/index.html](../../coverage/reports/lcov-report/index.html) and navigate the file.
 
@@ -34,14 +34,14 @@ If you've done this correctly, you should see output that resembles:
     > Running "watch" task
     > Waiting...
 
-## Exercise 2
+## Exercise B
 
 Add a test for the `removeVowels()` method. The test should go to [/test/exercise1/word.ts](../../test/exercise1/word.ts)
 
 You should see the coverage report edge back up to 100%. The [exercise 1 coverage report][../../coverage/reports/lcov-report/exercise1/word.js.html] should
 show the removeVowels method fully covered (green). You will notice `removeNumbers()` is still red.
 
-## Exercise 3
+## Exercise C
 
 Add a test for the `removeNumbers()` method. The test should go to [/test/exercise1/word.ts](../../test/exercise1/word.ts)
 

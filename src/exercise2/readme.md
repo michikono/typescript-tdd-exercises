@@ -5,7 +5,7 @@
 1. Learn the difference between spies, mocks, and stubs
 2. Write tests for code with dependencies
 
-## Exercise 1
+## Exercise A
 
 In this exercise, you are given some code that already has partial coverage.
 
@@ -23,7 +23,7 @@ would evaluate to 3.
 `PowerExpression(NumberExpression(3))` would evaluate to 8
 4. Make sure your code coverage is constantly at 100%.
 
-## Exercise 2
+## Exercise B
 
 In most of your previous tests, you probably used the `NumberExpression` class. This might make
 sense because in this case, `NumberExpression` is very straight forward. The problem with this approach
@@ -38,7 +38,7 @@ passes regardless of what `Expression` implementation is passed into it. Try app
 between mocks, stubs, and dummy implementations of `Expression`. When done, revert the "bug" introduced to 
 `NumberExpression`.`eval()`.
 
-## Exercise 3
+## Exercise C
 
 In this last example, we will examine using external dependencies. In this specific case, we will treat
 JavaScript standard library `Math` as one: you can't modify it, didn't write it, but need its behavior.

@@ -1,6 +1,6 @@
 # Introducing Breaking Changes
 
-In Exercise 2, we touched on how test coverage helps you do smarter refactoring. In this section, we will modify 
+In Exercise 2B, we touched on how test coverage helps you see regession issues. In this section, we will modify 
 legacy code by introducing incremental tests.
 
 Note that for this exercise, the legacy methods will NOT be counted toward test coverage, but all new code you write will.
@@ -10,7 +10,7 @@ The legacy code in question places mines onto an imaginary board. We have two is
 dynamic board size and to fix a bug with mine placement, but either change would require a major rewrite. We will tackle 
 this rewrite by breaking the method into testable components.
 
-# Exercise 1
+# Exercise A
 
 In this first exercise, we want to introduce a small structural change that lets us write our high-level tests.
 
@@ -31,7 +31,7 @@ move the entire contents of `printMineSweeperBoard` to another method to accompl
 
 The above steps move key pieces of logic out of the legacy function without disrupting legacy code. 
 
-# Exercise 2
+# Exercise B
 
 Now we need to add as many tests as we can to the legacy logic while recognizing some things are difficult/impossible to test.
 
@@ -49,7 +49,7 @@ You may want to use a small value for `n` for this test given the bug mentioned 
 * Add a test for `printMineSweeperBoard` by stubbing `console.log` and ensuring it receives a non-null value (but don't 
 test for specifics beyond that for the purposes of this exercise) 
 
-# Exercise 3
+# Exercise C
 
 Now that you have test coverage, we are nearly ready to refactor the core logic. Before we can fix anything, we 
 need to isolate the code that is causing the problem. In order to do this, we need to break the `toString` 
