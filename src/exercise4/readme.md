@@ -64,3 +64,4 @@ or [Facade Pattern](http://en.wikipedia.org/wiki/Facade_pattern):
     // to make this testable might require some hard work behind the scenes
     new TerminalEngine().start();
     
+You may want to make these types of changes last after you have things working.
