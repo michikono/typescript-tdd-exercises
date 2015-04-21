@@ -3,86 +3,52 @@
 module GameOfLife {
     describe('GameOfLife', () => {
         describe('Terminal', () => {
-            var programStub:SinonStub;
             var programMock:BlessedProgram;
-            var screenStub:SinonStub;
             var screenMock:BlessedScreen;
-            var boxStub:SinonStub;
             var boxMock:BlessedBox;
             var processStub:SinonStub;
             var terminal:Terminal;
+            var sandbox:SinonSandbox;
 
-            before(() => {
-                blessed.program = sinon.stub();
-                blessed.screen = sinon.stub();
-                blessed.box = sinon.stub();
+            beforeEach(() => {
+                sandbox = sinon.sandbox.create();
+
+                blessed.program = sandbox.stub();
+                blessed.screen = sandbox.stub();
+                blessed.box = sandbox.stub();
 
                 programMock = {
-                    key: sinon.stub(),
-                    unkey: sinon.stub(),
-                    clear: sinon.stub(),
-                    enableMouse: sinon.stub(),
-                    disableMouse: sinon.stub(),
-                    showCursor: sinon.stub(),
-                    hideCursor: sinon.stub(),
-                    normalBuffer: sinon.stub(),
-                    alternateBuffer: sinon.stub(),
-                    exit: sinon.stub()
+                    key: sandbox.stub(),
+                    unkey: sandbox.stub(),
+                    clear: sandbox.stub(),
+                    enableMouse: sandbox.stub(),
+                    disableMouse: sandbox.stub(),
+                    showCursor: sandbox.stub(),
+                    hideCursor: sandbox.stub(),
+                    normalBuffer: sandbox.stub(),
+                    alternateBuffer: sandbox.stub(),
+                    exit: sandbox.stub()
                 };
 
                 screenMock = {
-                    render: sinon.stub(),
-                    append: sinon.stub(),
-                    remove: sinon.stub(),
-                    enableKeys: sinon.stub()
+                    render: sandbox.stub(),
+                    append: sandbox.stub(),
+                    remove: sandbox.stub(),
+                    enableKeys: sandbox.stub()
                 };
 
                 boxMock = {
                     content: ''
                 };
+                (<SinonStub> blessed.box).returns(boxMock);
+                (<SinonStub> blessed.program).returns(programMock);
+                (<SinonStub> blessed.screen).returns(screenMock);
 
-                programStub = <SinonStub> blessed.program;
-                programStub.returns(programMock);
-
-                screenStub = <SinonStub> blessed.screen;
-                screenStub.returns(screenMock);
-
-                boxStub = <SinonStub> blessed.box;
-                boxStub.returns(boxMock);
-            });
-
-            beforeEach(() => {
-                processStub = sinon.stub(process, 'exit');
-
-                (<SinonStub> blessed.program).reset();
-                (<SinonStub> blessed.screen).reset();
-                (<SinonStub> blessed.box).reset();
-
-                (<SinonStub> programMock.key).reset();
-                (<SinonStub> programMock.unkey).reset();
-                (<SinonStub> programMock.clear).reset();
-                (<SinonStub> programMock.enableMouse).reset();
-                (<SinonStub> programMock.disableMouse).reset();
-                (<SinonStub> programMock.showCursor).reset();
-                (<SinonStub> programMock.hideCursor).reset();
-                (<SinonStub> programMock.normalBuffer).reset();
-                (<SinonStub> programMock.alternateBuffer).reset();
-                (<SinonStub> programMock.exit).reset();
-
-                (<SinonStub> screenMock.render).reset();
-                (<SinonStub> screenMock.append).reset();
-                (<SinonStub> screenMock.remove).reset();
-                (<SinonStub> screenMock.enableKeys).reset();
+                processStub = sandbox.stub(process, 'exit');
             });
 
             afterEach(() => {
-                programStub.reset();
-                screenStub.reset();
-                boxStub.reset();
-                processStub.restore();
-            });
-
-            beforeEach(() => {
+                sandbox.restore();
                 terminal = null;
             });
 
@@ -90,19 +56,14 @@ module GameOfLife {
                 var initProgramStub:SinonStub;
                 var initScreenStub:SinonStub;
 
-                before(() => {
-                    initProgramStub = sinon.stub(Terminal.prototype, 'initProgram');
-                    initScreenStub = sinon.stub(Terminal.prototype, 'initScreen');
+                beforeEach(() => {
+                    initProgramStub = sandbox.stub(Terminal.prototype, 'initProgram');
+                    initScreenStub = sandbox.stub(Terminal.prototype, 'initScreen');
                 });
 
                 afterEach(() => {
                     initProgramStub.reset();
                     initScreenStub.reset();
-                });
-
-                after(() => {
-                    initProgramStub.restore();
-                    initScreenStub.restore();
                 });
 
                 it('Should call initialization methods', () => {
@@ -113,35 +74,25 @@ module GameOfLife {
             });
             describe('instance', () => {
                 it('should return an instance of Terminal', () => {
-                    var spy = sinon.spy(GameOfLife, 'Terminal');
+                    var spy = sandbox.spy(GameOfLife, 'Terminal');
                     var instance = Terminal.instance();
-                    spy.restore();
                     assert.ok(spy.calledWithNew(spy));
                 });
                 it('should pass blessed into the constructor call', () => {
-                    var spy = sinon.spy(GameOfLife, 'Terminal');
+                    var spy = sandbox.spy(GameOfLife, 'Terminal');
                     var instance = Terminal.instance();
-                    spy.restore();
                     assert.ok(spy.calledWithExactly(blessed));
                 });
             });
             describe('initProgram', () => {
                 var initScreenStub:SinonStub;
 
-                before(() => {
-                    initScreenStub = sinon.stub(Terminal.prototype, 'initScreen');
-                });
-
-                afterEach(() => {
-                    initScreenStub.reset();
-                });
-
-                after(() => {
-                    initScreenStub.restore();
+                beforeEach(() => {
+                    initScreenStub = sandbox.stub(Terminal.prototype, 'initScreen');
                 });
 
                 it('should attach a "q" event to getQuitCallback and call clear()', () => {
-                    var getQuitCallbackSpy = sinon.spy(Terminal.prototype, 'getQuitCallback');
+                    var getQuitCallbackSpy = sandbox.spy(Terminal.prototype, 'getQuitCallback');
                     terminal = new Terminal(blessed);
                     getQuitCallbackSpy.restore();
                     assert.ok((<SinonStub> programMock.key).calledWith('q'));
@@ -150,19 +101,14 @@ module GameOfLife {
                 });
             });
             describe('initScreen', () => {
-                var initProgramStub:SinonStub;
 
-                before(() => {
-                    initProgramStub = sinon.stub(Terminal.prototype, 'initProgram');
+                beforeEach(() => {
+                    sandbox.stub(Terminal.prototype, 'initProgram');
                 });
 
                 afterEach(() => {
-                    initProgramStub.reset();
                     (<SinonStub> screenMock.append).reset();
                     (<SinonStub> screenMock.enableKeys).reset();
-                });
-                after(() => {
-                    initProgramStub.restore();
                 });
 
                 // this is the main behavior that is crucial to showing content 
@@ -183,7 +129,7 @@ module GameOfLife {
             describe('print', () => {
                 it('should set be a wrapper for setContent', () => {
                     terminal = new Terminal(blessed);
-                    var setContentStub = sinon.stub(terminal, 'setContent');
+                    var setContentStub = sandbox.stub(terminal, 'setContent');
                     terminal.print("new content");
                     assert.ok(setContentStub.called);
                 });
@@ -196,7 +142,7 @@ module GameOfLife {
                 });
                 it('should attempt to kill the process', () => {
                     var terminal = new Terminal(blessed);
-                    var getQuitCallbackStub = sinon.stub(terminal, 'getQuitCallback');
+                    var getQuitCallbackStub = sandbox.stub(terminal, 'getQuitCallback');
                     terminal.exit();
                     assert.ok((<SinonStub> programMock.unkey).calledWith('q'));
                     assert.ok(getQuitCallbackStub.calledOnce);
