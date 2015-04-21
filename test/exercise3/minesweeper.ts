@@ -2,15 +2,6 @@
 
 module LegacyCode {
     describe('LegacyCode', () => {
-        var sandbox:SinonSandbox;
-
-        beforeEach(() => {
-            sandbox = sinon.sandbox.create();
-        });
-
-        afterEach(() => {
-            sandbox.restore();
-        });
 
         describe('MineSweeper', () => {
         });

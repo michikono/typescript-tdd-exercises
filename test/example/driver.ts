@@ -25,16 +25,6 @@ module Example {
     }
 
     describe('Example Module', () => {
-        var sandbox:SinonSandbox;
-
-        beforeEach(() => {
-            sandbox = sinon.sandbox.create();
-        });
-
-        afterEach(() => {
-            sandbox.restore();
-        });
-
         describe('Driver', () => {
             describe('park()', () => {
                 it('(CUSTOM IMPL) should reset the transportation position to (0, 0)', () => {

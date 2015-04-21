@@ -8,11 +8,8 @@ module GameOfLife {
             var boxMock:BlessedBox;
             var processStub:SinonStub;
             var terminal:Terminal;
-            var sandbox:SinonSandbox;
 
             beforeEach(() => {
-                sandbox = sinon.sandbox.create();
-
                 blessed.program = sandbox.stub();
                 blessed.screen = sandbox.stub();
                 blessed.box = sandbox.stub();
@@ -48,7 +45,6 @@ module GameOfLife {
             });
 
             afterEach(() => {
-                sandbox.restore();
                 terminal = null;
             });
 
