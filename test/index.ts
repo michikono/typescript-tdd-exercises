@@ -1,6 +1,11 @@
 /// <reference path="../references.ts" />
 require('source-map-support').install();
 
+module Example {
+    export var assert = require("assert");
+    export var sinon:SinonStatic = require("sinon");
+}
+
 module Exercise1 {
     export var assert = require("assert");
     export var sinon:SinonStatic = require("sinon");

@@ -1,6 +1,4 @@
 /// <reference path="../../../references.ts" />
-var assert = require("assert");
-var sinon:SinonStatic = require("sinon");
 
 // When testing modules you can declare tests inside a module block
 module Example {

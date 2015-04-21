@@ -1,6 +1,4 @@
 /// <reference path="../../references.ts" />
-var assert = require("assert");
-var sinon:SinonStatic = require("sinon");
 
 // When testing modules you can declare tests inside a module block
 module Example {
@@ -27,6 +25,16 @@ module Example {
     }
 
     describe('Example Module', () => {
+        var sandbox:SinonSandbox;
+
+        beforeEach(() => {
+            sandbox = sinon.sandbox.create();
+        });
+
+        afterEach(() => {
+            sandbox.restore();
+        });
+
         describe('Driver', () => {
             describe('park()', () => {
                 it('(CUSTOM IMPL) should reset the transportation position to (0, 0)', () => {
@@ -44,7 +52,7 @@ module Example {
                     var driver = new Driver(car);
 
                     // register a mock
-                    var mock = sinon.mock(car);
+                    var mock = sandbox.mock(car);
                     mock.expects("position").once().returns({x: 0, y: 0});
                     mock.expects("move").withArgs({x: 0, y: 0}).once();
 
@@ -60,7 +68,7 @@ module Example {
                     var mockTransport = new MechanicalThings.CarImpl();
 
                     // setup stubs to overwrite move method to force it to (0, 0)
-                    var stub = sinon.stub(mockTransport, 'move', function () {
+                    var stub = sandbox.stub(mockTransport, 'move', function () {
                         this.x = 1;
                         this.y = 1;
                     });
@@ -80,8 +88,8 @@ module Example {
                 // spies still execute the original methods!
                 it('(USING SPIES) should reset the transportation position to (0, 0)', () => {
                     var car = new MechanicalThings.CarImpl();
-                    var positionSpy = sinon.spy(car, "position");
-                    var moveSpy = sinon.spy(car, "move");
+                    var positionSpy = sandbox.spy(car, "position");
+                    var moveSpy = sandbox.spy(car, "move");
 
                     var driver = new Driver(car);
                     driver.park();
