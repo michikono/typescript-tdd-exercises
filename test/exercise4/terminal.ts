@@ -61,11 +61,6 @@ module GameOfLife {
                     initScreenStub = sandbox.stub(Terminal.prototype, 'initScreen');
                 });
 
-                afterEach(() => {
-                    initProgramStub.reset();
-                    initScreenStub.reset();
-                });
-
                 it('Should call initialization methods', () => {
                     terminal = new Terminal(blessed);
                     assert.ok(initProgramStub.calledWithExactly(blessed));
@@ -94,7 +89,6 @@ module GameOfLife {
                 it('should attach a "q" event to getQuitCallback and call clear()', () => {
                     var getQuitCallbackSpy = sandbox.spy(Terminal.prototype, 'getQuitCallback');
                     terminal = new Terminal(blessed);
-                    getQuitCallbackSpy.restore();
                     assert.ok((<SinonStub> programMock.key).calledWith('q'));
                     assert.ok((<SinonStub> programMock.clear).calledOnce);
                     assert.ok(getQuitCallbackSpy.calledOnce);
@@ -104,11 +98,6 @@ module GameOfLife {
 
                 beforeEach(() => {
                     sandbox.stub(Terminal.prototype, 'initProgram');
-                });
-
-                afterEach(() => {
-                    (<SinonStub> screenMock.append).reset();
-                    (<SinonStub> screenMock.enableKeys).reset();
                 });
 
                 // this is the main behavior that is crucial to showing content 
@@ -146,7 +135,6 @@ module GameOfLife {
                     terminal.exit();
                     assert.ok((<SinonStub> programMock.unkey).calledWith('q'));
                     assert.ok(getQuitCallbackStub.calledOnce);
-                    getQuitCallbackStub.restore();
                 });
             });
         });
