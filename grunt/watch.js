@@ -9,17 +9,6 @@ module.exports = {
             'src/**/*.ts',
             'test/**/*.ts'
         ],
-        tasks: ['clean:ts', 'ts:default', 'concat:build', 'concat:test', 'concat:coverage']
-    },
-    test: {
-        options: {
-            interrupt: true,
-            reload: true
-        },
-        files: [
-            'out/test.js',
-            'out/coverage.js'
-        ],
-        tasks: ['buildCoverage']
+        tasks: ['clean:ts', 'ts:default', 'concat:build', 'concat:test', 'concat:coverage', 'buildCoverage']
     }
 };
