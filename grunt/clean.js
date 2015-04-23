@@ -5,6 +5,7 @@ module.exports = {
         'coverage/*'
     ],
     ts: [
+        'out/instrument/*',
         'out/*.js*',
         'out/src/*',
         'out/test/*'

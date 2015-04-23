@@ -1,16 +1,25 @@
 // Watches files for changes and runs tasks based on the changed files
 module.exports = {
     ts: {
+        options: {
+            interrupt: true,
+            reload: true
+        },
         files: [
             'src/**/*.ts',
             'test/**/*.ts'
         ],
-        tasks: ['clean:ts', 'ts:default', 'concat:build', 'concat:test']
+        tasks: ['clean:ts', 'ts:default', 'concat:build', 'concat:test', 'concat:coverage']
     },
     test: {
+        options: {
+            interrupt: true,
+            reload: true
+        },
         files: [
-            'out/test.js'
+            'out/test.js',
+            'out/coverage.js'
         ],
-        tasks: ['mochaTest:test', 'buildCoverage', 'coverage']
+        tasks: ['buildCoverage']
     }
 };

@@ -23,16 +23,14 @@ module.exports = function (grunt) {
             'concat:coverage',
             'mochaTest:coverage',
             'storeCoverage',
-            'makeReport'
+            'makeReport',
+            'coverage'
         ]);
 
     grunt.registerTask('test', [
         'clean:default',
         'ts:default',
-        'concat:test',
-        'mochaTest',
-        'buildCoverage',
-        'coverage'
+        'buildCoverage'
     ]);
 
     grunt.registerTask('build', [
