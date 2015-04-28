@@ -3,6 +3,7 @@ module.exports = {
         options: {
             reporter: 'spec',
             quiet: false // Optionally suppress output to standard out (defaults to false)
+            ,bail: false
         },
         src: [
             'out/test.js'
@@ -13,7 +14,8 @@ module.exports = {
             // alternate usable values: progress, spec, dot, nyan, landing
             reporter: 'landing',
             quiet: false, // Optionally suppress output to standard out (defaults to false)
-            clearRequireCache: true
+            clearRequireCache: true,
+            bail: false
         },
         src: [
             'out/coverage.js'

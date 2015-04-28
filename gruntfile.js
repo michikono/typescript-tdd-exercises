@@ -17,11 +17,12 @@ module.exports = function (grunt) {
 
     grunt.registerTask('buildCoverage',
         [
-            'clean:coverage',
             'replace:coverage',
+            'clean:instrument',
             'instrument',
             'concat:coverage',
             'mochaTest:coverage',
+            'clean:coverage',
             'storeCoverage',
             'makeReport',
             'coverage'

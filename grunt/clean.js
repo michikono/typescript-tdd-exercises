@@ -1,8 +1,10 @@
 // Empties folders to start fresh
 module.exports = {
     coverage: [
-        'out/instrument/*',
         'coverage/*'
+    ],
+    instrument: [
+        'out/instrument/*'
     ],
     ts: [
         'out/instrument/*',
@@ -14,7 +16,6 @@ module.exports = {
         'out/build.js*'
     ],
     default: [
-        'out/*',
-        'coverage/*'
+        'out/*'
     ]
 };
