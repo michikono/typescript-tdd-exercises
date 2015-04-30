@@ -56,6 +56,15 @@ test files and placed in [`out/coverage.js`](./out/coverage.js). The file is exe
 8. `npm run watch` watches for code changes that trigger the above steps automatically as necessary. It is meant to be 
 noisy if you are not writing passing tests.
 
+# Exercises
+
+1. [Exercise 1](./src/exercise1/README.md)
+2. [Exercise 2](./src/exercise2/README.md)
+3. [Exercise 3](./src/exercise3/README.md)
+4. [Exercise 4](./src/exercise4/README.md)
+
+Review the [example project](./src/example/README.md) if you have questions about TypeScript.
+
 # Notes
 
 ## TypeScript
