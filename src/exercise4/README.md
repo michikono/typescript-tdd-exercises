@@ -7,18 +7,21 @@ To help you build this game, this exercise comes with a basic framework that han
 There is a `Terminal` class that you can use to print content to the screen. It is used like this (you don't need to test 
 this out):
 
-    var terminal = Terminal.instance();
-    terminal.setContent("text to show")
+````javascript
+var terminal = Terminal.instance();
+terminal.setContent("text to show")
+````
 
 You can press "q" to quit the program.
 
 A skeleton game engine has also been written for you. Use it like this:
 
-    var engine = new Engine();
-    engine.pipe(Terminal.instance());
-    engine.cycle((pipe: IPrintable) { });
-    engine.start();
-
+````javascript
+var engine = new Engine();
+engine.pipe(Terminal.instance());
+engine.cycle((pipe: IPrintable) { });
+engine.start();
+````
     
 The `cycle`'s callback method is called every `engine.getRefreshRate()` milliseconds (default: 250). In that loop, use 
 the pipe's output methods to push contents to the screen. 
@@ -49,7 +52,9 @@ living ones (for example, this one: █). You may need to create more files and 
 
 To run your game, initialize your game logic in [run.ts](./run.ts). There is already a example in that file. To run it:
 
-    npm run e4
+````bash
+$ npm run e4
+````
 
 You can press "q" to quit the program.
 
@@ -57,11 +62,15 @@ Because `run.ts` is not covered by tests, it is important that it is as small as
 out of this file as possible. Try replacing the example initialization logic with one using inversion of control
 to clean it up:
 
-    new TerminalEngine(Terminal.instance(), new DefaultConfigurations()).start(new GameLogic());
+````javascript
+new TerminalEngine(Terminal.instance(), new DefaultConfigurations()).start(new GameLogic());
+````
     
 or [Facade Pattern](http://en.wikipedia.org/wiki/Facade_pattern): 
 
-    // to make this testable might require some hard work behind the scenes
-    new TerminalEngine().start();
+````javascript
+// to make this testable might require some hard work behind the scenes
+new TerminalEngine().start();
+````
     
 You may want to make these types of changes last after you have things working.

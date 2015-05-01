@@ -15,11 +15,13 @@ some of the external dependency management related to testing frameworks.
 To accomplish namespaces, we will leverage [TypeScript modules](http://www.typescriptlang.org/Handbook#modules). You can 
 see an example of this in [MechanicalThings/car.ts](./MechanicalThings/car.ts).
 
-    module MechanicalThings {
+````javascript
+module MechanicalThings {
 
-    // ..
+// ..
 
-    }
+}
+````
 
 This converts into a closure when compiled to JavaScript. As you would expect, re-using this same module name in another file will
 also share the scope between the two files. You can see this interaction in the [Driver.ts test](../../test/example/driver.ts)

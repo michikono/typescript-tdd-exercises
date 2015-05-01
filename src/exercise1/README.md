@@ -8,9 +8,11 @@
 
 ## Preparation
 
-Edit [index.ts](./index.ts); uncomment the line about `istanbul ignore` that looks like this:
+Edit [index.ts](./index.ts); remove the line about `istanbul ignore` that looks like this:
 
-    /* istanbul ignore next */
+````javascript
+/* istanbul ignore next */
+````
 
 By removing this line, the class defined below it will begin to count against the code coverage reports. You should notice
 your code coverage is no longer at 100%. The next three exercises will help you get back to 100% coverage.
@@ -21,18 +23,24 @@ Find and open the [/coverage/reports/lcov-report/index.html](../../coverage/repo
 
 You can re-run tests individually by running:
 
-    $ grunt test
+````bash
+$ grunt test
+````
 
 This command will also refresh the coverage report. Note that the you can run these commands automatically via the `watch` command:
 
-    $ grunt watch
+````bash
+$ grunt watch
+````
 
 If you've done this correctly, you should see output that resembles:
 
-    $ grunt watch
+````bash
+$ grunt watch
 
-    > Running "watch" task
-    > Waiting...
+> Running "watch" task
+> Waiting...
+````
 
 ## Exercise B
 
