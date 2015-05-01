@@ -34,7 +34,7 @@ move the entire contents of `printMineSweeperBoard` to another method to accompl
 * Change the signature of `toString` to return a string that would otherwise be printed to console. 
 * Change `printMineSweeperBoard` so that it prints the return value from `toString` as shown here:
 
-```javascript
+```typescript
 console.log(new MineSweeper().toString(x));
 ```
 

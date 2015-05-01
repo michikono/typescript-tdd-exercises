@@ -77,6 +77,12 @@ Review the [example project](./src/example/README.md) if you have questions abou
 
 * Pay special attention to nesting modules: top level modules don't use `export`, but children should. See more here: 
 [http://stackoverflow.com/questions/12991382/typescript-modules](http://stackoverflow.com/questions/12991382/typescript-modules)
+* TypeScript files should always start with a reference line (think of it as a header file) that links to 
+[references.ts](./references.ts) using a relative path; for example:
+
+```typescript
+/// <reference path="../../references.ts" />
+```
 
 ## Structure
 

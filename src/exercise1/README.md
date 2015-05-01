@@ -38,7 +38,7 @@ recompile the TypeScript and run all tests.
 Right now, we actually do not have 100% coverage; some test coverage analysis is being suppressed. Edit 
 [index.ts](./index.ts); remove the line about `istanbul ignore` that looks like this:
 
-```javascript
+```typescript
 /* istanbul ignore next */
 ```
 

@@ -11,7 +11,7 @@ In this exercise, you are given some code that already has partial coverage.
 
 Edit [calculator.ts](./calculator.ts); remove the lines about `istanbul ignore` on **line 28 & 29** that look like this:
 
-```javascript
+```typescript
 /* istanbul ignore next */
 ```
 
@@ -33,7 +33,7 @@ is that if there is a bug in `NumberExpression`, all of your subsequent tests br
 
 Replace the contents of `NumberExpression`.`eval()` so it always returns a random number between 1 - 3:
 
-```javascript
+```typescript
 Math.ceil(Math.random() * 3)
 ```
 

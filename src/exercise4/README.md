@@ -14,7 +14,7 @@ To help you build this game, this exercise comes with a basic framework that han
 There is a `Terminal` class that you can use to print content to the screen. It is used like this (you don't need to test 
 this out):
 
-```javascript
+```typescript
 var terminal = Terminal.instance();
 terminal.setContent("text to show")
 ```
@@ -23,7 +23,7 @@ You can press "q" to quit the program.
 
 A skeleton game engine has also been written for you. Use it like this:
 
-```javascript
+```typescript
 var engine = new Engine();
 engine.pipe(Terminal.instance());
 engine.cycle((pipe: IPrintable) { });
@@ -69,13 +69,13 @@ Because `run.ts` is not covered by tests, it is important that it is as small as
 out of this file as possible. Try replacing the example initialization logic with one using inversion of control
 to clean it up:
 
-```javascript
+```typescript
 new TerminalEngine(Terminal.instance(), new DefaultConfigurations()).start(new GameLogic());
 ```
     
 or [Facade Pattern](http://en.wikipedia.org/wiki/Facade_pattern): 
 
-```javascript
+```typescript
 // to make this testable might require some hard work behind the scenes
 new TerminalEngine().start();
 ```

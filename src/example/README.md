@@ -15,7 +15,7 @@ some of the external dependency management related to testing frameworks.
 To accomplish namespaces, we will leverage [TypeScript modules](http://www.typescriptlang.org/Handbook#modules). You can 
 see an example of this in [MechanicalThings/car.ts](./MechanicalThings/car.ts).
 
-```javascript
+```typescript
 module MechanicalThings {
 // ..
 }
