@@ -30,7 +30,7 @@ engine.game(game: IGame);
 engine.start();
 ```
     
-The `game` object has a `cycle` method that is called every `engine.getRefreshRate()` milliseconds (default: 250). In 
+The `IGame` instance has a `cycle` method that is called every `engine.getRefreshRate()` milliseconds (default: 250). In 
 that method, use the `IPrintable` argument's `print` method to push contents to the screen. 
 
 # Testing Tips
