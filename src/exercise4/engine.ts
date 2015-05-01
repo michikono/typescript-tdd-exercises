@@ -6,13 +6,13 @@ module GameOfLife {
     }
 
     export interface IGame {
-        start(): void;
+        cycle(callback: (pipe: IPrintable) => void): void;
     }
 
-    export class Engine implements IPrintable, IGame {
+    export class Engine implements IPrintable {
         private refreshInterval:number = 250;
         private intervalId:number;
-        private callback: (pipe: IPrintable) => void = (pipe: IPrintable) => {};
+        private gameInstance: IGame;
         private pipeInstance: IPrintable;
 
         public pipe(pipe: IPrintable) {
@@ -24,12 +24,14 @@ module GameOfLife {
             this.pipeInstance.print(content);
         }
 
-        public cycle(callback: (pipe: IPrintable) => void) {
-            this.callback = callback;
+        public game(game: IGame) {
+            this.gameInstance = game;
         }
 
         public start() {
-            this.intervalId = setInterval(this.callback.bind(this, this.pipeInstance), this.refreshInterval);
+            if(this.gameInstance) {
+                this.intervalId = setInterval(this.gameInstance.cycle.bind(this.gameInstance, this.pipeInstance), this.refreshInterval);
+            }
         }
 
         public stop() {

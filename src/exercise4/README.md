@@ -25,8 +25,8 @@ A skeleton game engine has also been written for you. Use it like this:
 
 ```typescript
 var engine = new Engine();
-engine.pipe(Terminal.instance());
-engine.cycle((pipe: IPrintable) { });
+engine.pipe(printer: IPrintable);
+engine.game(game: IGame);
 engine.start();
 ```
     
@@ -41,6 +41,13 @@ you never want to call in your tests.
 * If something is difficult to test, re-think what you've written. 
 [Inversion of control](http://stackoverflow.com/questions/3058/what-is-inversion-of-control) is usually a good place to
 start.
+* Mocking/stubbing/spying-on instance methods called during a constructor is sometimes challenging, since it will impact
+all subsequent instances unless you are careful. If you plan to do this, use this syntax (sandbox ensures cleanup):
+
+```typescript
+var mySpy = sandbox.spy(TheClassName.prototype, 'instanceMethod');
+```
+
 
 # Rules of the Game
 
@@ -65,19 +72,21 @@ $ npm run e4
 
 You can press "q" to quit the program.
 
-Because `run.ts` is not covered by tests, it is important that it is as small as possible. Keep as much application logic
-out of this file as possible. Try replacing the example initialization logic with one using inversion of control
-to clean it up:
+The current sample code in [`run.ts`](./run.ts) is using a simple object that matches the `IGame` interface. Because 
+`run.ts` is not covered by tests, it is important that it is as small as possible. Try refactoring your version of
+this code to use a more elegant design. For example, using a class to wrap the game logic better:
 
 ```typescript
-new TerminalEngine(Terminal.instance(), new DefaultConfigurations()).start(new GameLogic());
+var engine = new Engine();
+engine.pipe(Terminal.instance());
+engine.game(new MineSweeper());
+engine.start();
 ```
-    
-or [Facade Pattern](http://en.wikipedia.org/wiki/Facade_pattern): 
+
+or the [Facade Pattern](http://en.wikipedia.org/wiki/Facade_pattern) to hide this initialization logic: 
 
 ```typescript
-// to make this testable might require some hard work behind the scenes
-new TerminalEngine().start();
+new MineSweeperGame().start();
 ```
     
 You may want to make these types of changes last after you have things working.

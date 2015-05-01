@@ -90,11 +90,8 @@ Review the [example project](./src/example/README.md) if you have questions abou
 TypeScript environment (although entirely doable).
 * You can find example files at [`src/example/`](./src/example/) and [`test/example/`](./test/example/).
 * You can find instructions for individual exercises in the [`src/`](./src/) folder.
-* All of your `.ts` files should start with a reference to the root level [`references.ts`](./references.ts) file. See 
-examples.
 * TypeScript declarations are found in [`tsd.d.ts`](./tsd.d.ts), and are managed using `tsd`. They are like `.h` files 
-in other
-languages. If you end up using external libraries such as Underscore.js, you may want to install dependencies
+in other languages. If you end up using external libraries such as Underscore.js, you may want to install dependencies
 using `tsd install [name] --save` (more on this here: 
 [https://github.com/DefinitelyTyped/tsd](https://github.com/DefinitelyTyped/tsd))
 * Folders you may want to mark as excluded from your IDE's code index: `out/`, `node_modules/`, and `coverage/`.
@@ -104,8 +101,7 @@ using `tsd install [name] --save` (more on this here:
 * This setup process borrows from the [Typescript Starter repo](https://github.com/michikono/typescript-starter)
 * You need to install `npm` (`node` [comes with it](http://nodejs.org/download/)). This is because TypeScript
 compiles to JavaScript and without Node, you would need to run your code in a browser. Running sample snippets in a 
-browser
-adds unnecessary complexity as compared to running Node scripts.
+browser adds unnecessary complexity as compared to running Node scripts.
 * Testing is done using two libraries. One is [Mocha](http://mochajs.org/#getting-started), a framework for writing 
 assertions (the `assert` variable). The other is [Sinon](http://sinonjs.org/docs/), a stubbing and mocking library 
 (the `sinon` and `sandbox` variables). See examples of this in [Driver tests](./test/example/driver.ts).

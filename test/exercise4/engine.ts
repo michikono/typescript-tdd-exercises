@@ -44,74 +44,65 @@ module GameOfLife {
                 });
             });
 
-            describe('cycle', () => {
+            describe('game', () => {
+                var mockGame: IGame;
+                beforeEach(() => {
+                    mockGame = <IGame> {
+                        cycle: sandbox.spy()
+                    }
+                });
+
                 it('should not call cycle initially', () => {
                     engine = new Engine();
-                    var callback = sandbox.stub().returns('');
-                    engine.cycle(callback);
+                    engine.game(mockGame);
                     engine.start();
-                    assert.ok(callback.notCalled);
+                    assert.ok((<SinonSpy> mockGame.cycle).notCalled);
                 });
                 it('should call cycle once after the initial tick', () => {
                     engine = new Engine();
-                    var callback = sandbox.stub().returns('');
-                    engine.cycle(callback);
+                    engine.game(mockGame);
                     engine.start();
                     clock.tick(engine.getRefreshRate() + 1);
-                    assert.ok(callback.calledOnce);
+                    assert.ok((<SinonSpy> mockGame.cycle).calledOnce);
                 });
                 it('should call cycle multiple times as time moves forward', () => {
                     engine = new Engine();
-                    var callback = sandbox.stub().returns('');
-                    engine.cycle(callback);
+                    engine.game(mockGame);
                     engine.start();
                     clock.tick(engine.getRefreshRate() + 1);
                     clock.tick(engine.getRefreshRate() + 1);
-                    assert.ok(callback.calledTwice);
+                    assert.ok((<SinonSpy> mockGame.cycle).calledTwice);
                 });
                 it('should call cycle at a rate that is set by setRefreshRate', () => {
                     engine = new Engine();
-                    var callback = sandbox.stub().returns('');
-                    engine.cycle(callback);
+                    engine.game(mockGame);
                     engine.setRefreshRate(1000);
                     engine.start();
                     clock.tick(1001);
 
                     clock.tick(1001);
-                    assert.ok(callback.called);
+                    assert.ok((<SinonSpy> mockGame.cycle).called);
                 });
             });
 
             describe('start', () => {
-                it('should not call callback initially', () => {
-                    engine = new Engine();
-                    var callbackSpy = sandbox.spy(engine, 'callback');
-                    engine.start();
-                    assert.ok(callbackSpy.notCalled);
+                var mockGame: IGame;
+                beforeEach(() => {
+                    mockGame = <IGame> {
+                        cycle: sandbox.spy()
+                    }
                 });
-                it('should call callback once after the initial tick', () => {
+
+                it('should bind game.cycle to game and he pipe instance', () => {
+                    var pipe = {
+                        print: sandbox.spy()
+                    };
                     engine = new Engine();
-                    var callbackSpy = sandbox.spy(engine, 'callback');
+                    engine.game(mockGame);
+                    engine.pipe(pipe);
+                    var bindSpy = sandbox.spy(mockGame.cycle, 'bind');
                     engine.start();
-                    clock.tick(engine.getRefreshRate() + 1);
-                    assert.ok(callbackSpy.calledOnce);
-                });
-                it('should call callback multiple times as time moves forward', () => {
-                    engine = new Engine();
-                    var callbackSpy = sandbox.spy(engine, 'callback');
-                    engine.start();
-                    clock.tick(engine.getRefreshRate() + 1);
-                    clock.tick(engine.getRefreshRate() + 1);
-                    assert.ok(callbackSpy.calledTwice);
-                });
-                it('should call callback at a rate that is set by setRefreshRate', () => {
-                    engine = new Engine();
-                    var callbackSpy = sandbox.spy(engine, 'callback');
-                    engine.setRefreshRate(1000);
-                    engine.start();
-                    clock.tick(1001);
-                    clock.tick(1001);
-                    assert.ok(callbackSpy.called);
+                    assert.ok(bindSpy.calledWithExactly(mockGame, pipe));
                 });
             });
             describe('stop', () => {

@@ -2,7 +2,6 @@
 module.exports = {
     ts: {
         options: {
-            interrupt: true,
             reload: true
         },
         files: [
