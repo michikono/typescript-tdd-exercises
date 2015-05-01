@@ -1,5 +1,12 @@
 # Writing a Real Program
 
+## Objectives
+
+1. Deal with external dependencies/frameworks 
+2. Use lessons learned to write a larger program
+
+## Summary
+
 In this exercise, we will write a traditional TDD exercise application: Conway's Game of Life. This game has a few simple
 rules that simulate "life." 
 

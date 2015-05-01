@@ -1,6 +1,13 @@
 # Introducing Breaking Changes
 
-In Exercise 2B, we touched on how test coverage helps you see regession issues. In this section, we will modify 
+## Objectives
+
+1. Learn strategies for testing legacy code
+2. Learn how to refactor legacy code in a TDD way 
+
+## Summary
+
+In Exercise 2B, we touched on how test coverage helps you see regression issues. In this section, we will modify 
 legacy code by introducing incremental tests.
 
 Note that for this exercise, the legacy methods will NOT be counted toward test coverage, but all new code you write will.
