@@ -28,6 +28,10 @@ To run tests manually:
 $ npm test
 ```
 
+If you see the following, your setup process is complete:
+
+![expected output](./assets/results.png)
+
 To get notifications working, you may need to install the following:
 
 1. Install [Growl](http://growl.info/downloads#growlnotify)
