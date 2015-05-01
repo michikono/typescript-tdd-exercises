@@ -1,3 +1,7 @@
+# This folder contains NO EXERCISES. 
+
+Use the source code found here for some guidance on TypeScript as it relates to this specific testing environment.
+
 # Overview
 
 In browsers, JavaScript shares the same scope across all files. The only way to make something private is to place it inside
