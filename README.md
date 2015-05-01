@@ -9,7 +9,7 @@ minimum code coverage percentage (95%).
 First install all dependencies:
 
 ````bash
-npm install
+$ npm install
 ````
 
 ## Setting up TypeScript watchers (compiles your code)
@@ -19,13 +19,13 @@ For these exercises, we will use [Grunt](http://gruntjs.com/) to manage the buil
 This final step is the one that turns on the TDD process and is what you use going forward:
 
 ````bash
-npm run watch
+$ npm run watch
 ````
 
 To run tests manually:
 
 ````bash
-npm test
+$ npm test
 ````
 
 To get notifications working, you may need to install the following:
