@@ -13,19 +13,19 @@ the file.
 
 You can re-run tests individually by running:
 
-````bash
+```shell
 $ grunt test
-````
+```
 
 This command will also refresh the coverage report. Note that the you can run these commands automatically via the 
 `watch` command:
 
-````bash
+```shell
 $ grunt watch
 >
 > Running "watch" task
 > Waiting...
-````
+```
 
 This is the baseline you want for all of your tests going forward.
 
@@ -38,9 +38,9 @@ recompile the TypeScript and run all tests.
 Right now, we actually do not have 100% coverage; some test coverage analysis is being suppressed. Edit 
 [index.ts](./index.ts); remove the line about `istanbul ignore` that looks like this:
 
-````javascript
+```javascript
 /* istanbul ignore next */
-````
+```
 
 By removing this line, the class defined below it will begin to count against the code coverage reports. You should notice
 your code coverage is no longer at 100%.

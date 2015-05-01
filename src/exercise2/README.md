@@ -11,9 +11,9 @@ In this exercise, you are given some code that already has partial coverage.
 
 Edit [calculator.ts](./calculator.ts); remove the lines about `istanbul ignore` on **line 28 & 29** that look like this:
 
-````javascript
+```javascript
 /* istanbul ignore next */
-````
+```
 
 By removing these lines, the class defined below it will begin to count against the code coverage reports. You should notice
 your code coverage is no longer at 100%. Make sure your watcher is running (`grunt watch`)
@@ -33,9 +33,9 @@ is that if there is a bug in `NumberExpression`, all of your subsequent tests br
 
 Replace the contents of `NumberExpression`.`eval()` so it always returns a random number between 1 - 3:
 
-````javascript
+```javascript
 Math.ceil(Math.random() * 3)
-````
+```
 
 Notice how most of your tests are now broken, and inconsistently at that! Fix all your tests so that each
 passes regardless of what `Expression` implementation is passed into it. Try approaches varying
