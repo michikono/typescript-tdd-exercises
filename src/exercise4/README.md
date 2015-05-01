@@ -31,7 +31,7 @@ engine.start();
 ```
     
 The `cycle`'s callback method is called every `engine.getRefreshRate()` milliseconds (default: 250). In that loop, use 
-the pipe's output methods to push contents to the screen. 
+the `IPrintable`'s `print` method to push contents to the screen. 
 
 # Testing Tips
 
@@ -42,7 +42,7 @@ you never want to call in your tests.
 [Inversion of control](http://stackoverflow.com/questions/3058/what-is-inversion-of-control) is usually a good place to
 start.
 * Mocking/stubbing/spying-on instance methods called during a constructor is sometimes challenging, since it will impact
-all subsequent instances unless you are careful. If you plan to do this, use this syntax (sandbox ensures cleanup):
+all subsequent instances unless you are careful. If you plan to do this, use this syntax (`sandbox` ensures your hooks get cleaned up):
 
 ```typescript
 var mySpy = sandbox.spy(TheClassName.prototype, 'instanceMethod');
