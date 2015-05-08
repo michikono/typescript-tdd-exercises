@@ -6,7 +6,7 @@ minimum code coverage percentage (95%).
 
 # Installing and running
 
-You'll need to install [npm](https://docs.npmjs.com/getting-started/installing-node) and change your current working directory to this folder.
+Clone this project. You'll need to install [npm](https://docs.npmjs.com/getting-started/installing-node) and change your current working directory to this folder.
 
 Install all dependencies:
 
