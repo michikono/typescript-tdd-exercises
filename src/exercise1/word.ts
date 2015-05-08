@@ -3,7 +3,7 @@
 module Exercise1 {
     // REMOVE THESE LINES WHEN START THE EXERCISE
     /* istanbul ignore next */
-    class Word {
+    export class Word {
         constructor(private word:string) {
 
         }
