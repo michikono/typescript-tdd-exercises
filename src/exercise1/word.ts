@@ -9,7 +9,7 @@ module Exercise1 {
         }
 
         public removeVowels():string {
-            return this.word.replace(/aeiou/ig, '');
+            return this.word.replace(/[aeiou]/ig, '');
         }
 
         public removeNumbers():string {
