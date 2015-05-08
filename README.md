@@ -122,8 +122,8 @@ find more about it [here](http://sinonjs.org/docs/#sandbox).
 If you are getting problems installing the npm packages, try fixing the directory permissions. Go to the working directory for the project:
 
 ```shell
-sudo chown -R $USER ~/.npm
-sudo chown -R $USER /usr/local/lib/node_modules
+sudo chown -R $USER ~/.npm # <== your user's npm cache folder
+sudo chown -R $USER /usr/local/lib/node_modules # <== your global npm folder
 sudo rm -Rf node_modules
 npm install
 ```
