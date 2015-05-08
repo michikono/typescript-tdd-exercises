@@ -6,23 +6,27 @@ minimum code coverage percentage (95%).
 
 # Installing and running
 
-First install all dependencies:
+You'll need to install [npm](https://docs.npmjs.com/getting-started/installing-node) and change your current working directory to this folder.
+
+Install all dependencies:
 
 ```shell
 $ npm install
 ```
 
+DO NOT use `sudo` in this step or you will have problems!
+
 ## Setting up TypeScript watchers (compiles your code)
 
 For these exercises, we will use [Grunt](http://gruntjs.com/) to manage the build process.
 
-This final step is the one that turns on the TDD process and is what you use going forward:
+Test that `npm watch` is working correctly:
 
 ```shell
 $ npm run watch
 ```
 
-To run tests manually:
+You should see it "waiting..." If so, CTRL + C to break out and then run the tests manually:
 
 ```shell
 $ npm test
