@@ -116,3 +116,14 @@ assertions (the `assert` variable). The other is [Sinon](http://sinonjs.org/docs
 * As a convenience, all test modules have a `sandbox` variable that you can use to make stubs. It will clean up your 
 mocks and stubs after each test run. You can mostly ignore this, but if you are curious why this was setup, you can 
 find more about it [here](http://sinonjs.org/docs/#sandbox).
+
+## Troubleshooting
+
+If you are getting problems installing the npm packages, try fixing the directory permissions. Go to the working directory for the project:
+
+```shell
+sudo chown -R $USER ~/.npm
+sudo chown -R $USER /usr/local/lib/node_modules
+sudo rm -Rf node_modules
+npm install
+```
