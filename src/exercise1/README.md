@@ -36,7 +36,7 @@ recompile the TypeScript and run all tests.
 ## Exercise B
 
 Right now, we actually do not have 100% coverage; some test coverage analysis is being suppressed. Edit 
-[index.ts](./index.ts); remove the line about `istanbul ignore` that looks like this:
+[word.ts](./word.ts); remove the line about `istanbul ignore` that looks like this:
 
 ```typescript
 /* istanbul ignore next */
