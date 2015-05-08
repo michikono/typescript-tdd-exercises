@@ -50,6 +50,6 @@ JavaScript standard library `Math` as one: you can't modify it, didn't write it,
 Add the following new `Expression` type and write tests for it:
 
 * `RandomExpression` (`random(n)`) - return a random integer between 0 and `Expression`, inclusively. For example, 
-`RandomExpression(NumberExpression(3))` would evaluate to a random number 0 - 6
+`RandomExpression(NumberExpression(3))` would evaluate to a random number 0 - 3
 
 Note that this last `Expression` implementation's tests will absolutely require that you stub the `Math.random` method.
