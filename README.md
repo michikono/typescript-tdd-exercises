@@ -6,7 +6,14 @@ minimum code coverage percentage (95%).
 
 # Installing and running
 
-First install all dependencies:
+First clone this repository and change into the newly cloned directory.  The rest of this guide assumes you are in the project's root directory when running commands.
+
+```shell
+$ git clone https://github.com/michikono/typescript-tdd-exercises
+$ cd typescript-tdd-exercises
+```
+
+Then install all dependencies:
 
 ```shell
 $ npm install
