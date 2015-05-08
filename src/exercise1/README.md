@@ -36,7 +36,7 @@ recompile the TypeScript and run all tests.
 ## Exercise B
 
 Right now, we actually do not have 100% coverage; some test coverage analysis is being suppressed. Edit 
-[index.ts](./index.ts); remove the line about `istanbul ignore` that looks like this:
+[word.ts](./word.ts); remove the line about `istanbul ignore` that looks like this:
 
 ```typescript
 /* istanbul ignore next */
@@ -47,9 +47,9 @@ your code coverage is no longer at 100%.
 
 Add a test for the `removeVowels()` method. The test should go to [/test/exercise1/word.ts](../../test/exercise1/word.ts)
 
-You should see the coverage report edge back up to 100%. The 
-[exercise 1 coverage report][../../coverage/reports/lcov-report/exercise1/word.js.html] should show the removeVowels 
-method fully covered (green). You will notice `removeNumbers()` is still red.
+You should see the coverage report edge back up to ~90%. The 
+[exercise 1 coverage report](../../coverage/reports/lcov-report/exercise1/word.js.html) should show the removeVowels 
+method fully covered (green). But you will notice `removeNumbers()` is still red and it is causing coverage to fall below 100%.
 
 ## Exercise C
 
