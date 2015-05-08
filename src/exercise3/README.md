@@ -35,7 +35,7 @@ move the entire contents of `printMineSweeperBoard` to another method to accompl
 * Change `printMineSweeperBoard` so that it prints the return value from `toString` as shown here:
 
 ```typescript
-console.log(new MineSweeper().toString(x));
+console.log(new MineSweeper().toString(guesses, mineCount));
 ```
 
 The above steps move key pieces of logic out of the legacy function without disrupting legacy code. 
