@@ -6,7 +6,7 @@ module GameOfLife {
     }
 
     export interface IGame {
-        cycle(callback: (pipe: IPrintable) => void): void;
+        cycle(pipe: IPrintable): void;
     }
 
     export class Engine implements IPrintable {
