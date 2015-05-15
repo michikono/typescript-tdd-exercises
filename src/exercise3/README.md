@@ -55,8 +55,6 @@ Let's add more tests so that refactoring is safer. Add tests to `toString` that:
 * Ensures at least `n` mines are placed (mines are either `?` or `*`) where `n` is the argument provided in the method.
 You may want to use a small value for `n` for this test given the bug mentioned previously. DO NOT FIX THE BUG.
 * Ensures a string containing only underscores, asterisks, line breaks, and question marks is returned
-* Add a test for `printMineSweeperBoard` by stubbing `console.log` and ensuring it receives a non-null value (but don't 
-test for specifics beyond that for the purposes of this exercise) 
 
 # Exercise C
 
@@ -73,7 +71,7 @@ If you haven't encounter *the* bug yet -- great. Let's encounter it now. Try upd
 mine placement to attempt to place 99 mines in a 10x10 grid (all squares except 1 will be filled with a mine). The test 
 should fail nearly every time.
  
-Now we need to update the actual mine placement logic:
+Now we need to update the actual mine placement logic. We will simulate a situation where core logic is being changed:
 
 * Inside the inner `for` loop, there is an `if` block that contains logic for determining if a mine should be placed. 
 Extract *the if condition* into a method with the signature: `shouldPlaceMine: () => bool`.
@@ -81,17 +79,16 @@ Extract *the if condition* into a method with the signature: `shouldPlaceMine: (
 which positions mines should be placed in. The method returns an array of positions that mines should be placed at and if 
 it runs again, returns the same results.
 * Fix the logic for `shouldPlaceMine`: right now it gives early squares a higher chance of getting a mine (this is the
-bug). Use the results from `getMineLocations` to place all mines with equal probability.
-* Lower the number of mines being placed and update your tests for `printMineSweeperBoard`: stub `getMineLocations()` 
-so that it returns a predetermined set of coordinates that you can write your tests against. The previously 
-randomly broken tests should now always pass. Make sure to check if `getMineLocations` is getting called (via spies).
-* Add a method for printing a mine: change the line with the ternary operator to call a method instead: 
-`placeMine: (coordinate: MineCoordinate) => string` which will return either `*` or `?` based on if the location has been
-guessed during the constructor.
+bug) and possibly does not place enough mines. Use the results from `getMineLocations` to make sure all mines always get placed. DO NOT SPEND TOO MUCH TIME TRYING TO GET PERFECT DISTRIBUTION -- the important part is that all required mines are always placed.
 
 The above illustrates an example of how one might start to refactor a block of procedural code. There's much more refactoring 
 that could be done, which is left as optional exercises:
 
+* Lower the number of mines being placed and update your tests for `printMineSweeperBoard`: stub `getMineLocations()` 
+so that it returns a predetermined set of coordinates that you can write your tests against. The randomly broken tests should now always pass. Make sure to check if `getMineLocations` is getting called (via spies).
+* Add a method for printing a mine: change the line with the ternary operator to call a method instead: 
+`placeMine: (coordinate: MineCoordinate) => string` which will return either `*` or `?` based on if the location has been
+guessed during the constructor.
 * Extract the logic to check if a guess overlaps with a mine placement (the line that mentions `guesses[k].x == j`)
 * Add a border to the entire board
 * Extract a method to build a row (instead of an additional inner `for` loop)
