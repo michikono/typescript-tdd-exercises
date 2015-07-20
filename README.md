@@ -1,4 +1,4 @@
-# Overview
+# Overview [![Build Status](https://travis-ci.org/michikono/typescript-tdd-exercises.svg?branch=master)](https://travis-ci.org/michikono/typescript-tdd-exercises)
 
 This project contains a set of exercises to help teach TDD. It will auto-compile your TypeScript code, run your tests 
 and, enforce a
